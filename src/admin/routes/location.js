@@ -2,10 +2,10 @@
 const router = require("express").Router();
 
 //Controller
-const locationController = require("../controllers/location");
+const locationController = require("../controller/location");
 
 //Middleware
-const locationMiddleware = require("../middlewares/content");
+const locationMiddleware = require("../middleware/content");
 
 //Routes
 router.get("/location", locationController.browse);

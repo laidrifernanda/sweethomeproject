@@ -2,10 +2,10 @@
 const router = require("express").Router();
 
 //Controller
-const styleController = require("../controllers/style");
+const styleController = require("../controller/style");
 
 //Middleware
-const styleMiddleware = require("../middlewares/content");
+const styleMiddleware = require("../middleware/content");
 
 //Routes
 router.get("/style", styleController.browse);

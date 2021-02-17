@@ -1,5 +1,5 @@
 //Import model
-const { locationModel } = require("../../models");
+const { locationModel } = require("../../model");
 
 //Module exports
 module.exports = {

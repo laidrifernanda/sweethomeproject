@@ -14,7 +14,6 @@ const packageTableModel = require("./packageTable");
 const locationModel = require("./location");
 const galeryModel = require("./galery");
 const favoriteModel = require("./favorite");
-const durationTypeModel = require("./durationType");
 const cancelModel = require("./cancel");
 const buildTypeModel = require("./buildType");
 const appointementModel = require("./appointment");
@@ -36,7 +35,6 @@ module.exports = {
   locationModel,
   galeryModel,
   favoriteModel,
-  durationTypeModel,
   cancelModel,
   buildTypeModel,
   appointementModel,

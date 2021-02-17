@@ -44,6 +44,16 @@ const userSchema = new Schema(
       minlength: 3,
       maxlength: 255,
     },
+    appointments: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "appointment",
+      },
+    ],
+    activity: {
+      type: Date,
+      default: Date.now,
+    },
     createdAt: {
       type: Date,
       default: Date.now,

@@ -1,5 +1,5 @@
 //Import model
-const { serviceTypeModel } = require("../../models");
+const { serviceTypeModel } = require("../../model");
 
 //Module exports
 module.exports = {

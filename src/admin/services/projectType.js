@@ -1,5 +1,5 @@
 //Import model
-const { projectTypeModel } = require("../../models");
+const { projectTypeModel } = require("../../model");
 
 //Module exports
 module.exports = {
