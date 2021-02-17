@@ -3,19 +3,21 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 //Table
-const imageSchema = new Schema(
+const galerySchema = new Schema(
   {
-    image: {
+    photo: {
       type: String,
-      required: [true, "Name is required"],
-      minlength: 3,
-      maxlength: 255,
+      default: "none",
     },
     title: {
       type: String,
-      required: [true, " is required"],
-      minlength: 3,
-      maxlength: 255,
+      required: [true, "Title is Required"],
+      min: 2,
+      max: 255,
+    },
+    showcase:{
+      type: Schema.Types.ObjectId,
+      ref: 'showcase'
     },
     createdAt: {
       type: Date,
@@ -27,10 +29,9 @@ const imageSchema = new Schema(
     },
   },
   {
-    collection: "images",
+    collection: "galery",
   }
 );
 
-
 //Export modules
-module.exports = mongoose.model("images", imageSchema);
+module.exports = mongoose.model("galery", galerySchema);

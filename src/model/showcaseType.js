@@ -3,11 +3,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 //Table
-const buildingTypeSchema = new Schema(
+const showcaseTypeSchema = new Schema(
   {
     name: {
       type: String,
-      required: [true, "Name is required"],
+      required: [true, "name is required"],
       minlength: 3,
       maxlength: 255,
     },
@@ -21,10 +21,9 @@ const buildingTypeSchema = new Schema(
     },
   },
   {
-    collection: "buildingType",
+    collection: "showcaseType",
   }
 );
 
-
 //Export modules
-module.exports = mongoose.model("buildingType", buildingTypeSchema);
+module.exports = mongoose.model("showcaseType", showcaseTypeSchema);

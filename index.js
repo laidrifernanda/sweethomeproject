@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 require("dotenv").config();
 const passport = require('passport')
 const cookieSession = require('cookie-session')
+const cors = require('cors');
+
 //Require google passport setup
 require('./src/passports/googlePassport')
 //Require fb passport setup
@@ -34,7 +36,19 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Routes
+//Cors
+app.use(cors());
+
+//ROUTES
+//Admin
+app.use("/api/v1/admin", adminRoutes.adminRoutes);
+app.use("/api/v1/admin", adminRoutes.styleRoutes);
+app.use("/api/v1/admin", adminRoutes.buildTypeRoutes);
+app.use("/api/v1/admin", adminRoutes.locationRoutes);
+app.use("/api/v1/admin", adminRoutes.projectTypeRoutes);
+app.use("/api/v1/admin", adminRoutes.serviceTypeRoutes);
+
+//User
 app.use(router.usersRoutes);
 
 //Start server

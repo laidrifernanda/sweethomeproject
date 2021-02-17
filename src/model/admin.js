@@ -3,23 +3,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 //Table
-const userSchema = new Schema(
+const adminSchema = new Schema(
   {
-    firstname: {
+    name: {
       type: String,
       required: [true, "Firstname is required"],
-      minlength: 3,
-      maxlength: 255,
-    },
-    lastname: {
-      type: String,
-      required: [true, "Lastname is required"],
-      minlength: 3,
-      maxlength: 255,
-    },
-    phoneNumber: {
-      type: String,
-      default: null,
       minlength: 3,
       maxlength: 255,
     },
@@ -38,12 +26,6 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Password is required"],
     },
-    address: {
-      type: String,
-      default: null,
-      minlength: 3,
-      maxlength: 255,
-    },
     createdAt: {
       type: Date,
       default: Date.now,
@@ -54,10 +36,9 @@ const userSchema = new Schema(
     },
   },
   {
-    collection: "users",
+    collection: "admin",
   }
 );
 
-
 //Export modules
-module.exports = mongoose.model("users", userSchema);
+module.exports = mongoose.model("admin", adminSchema);

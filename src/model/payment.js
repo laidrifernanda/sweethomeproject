@@ -3,13 +3,15 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 //Table
-const workIncludeSchema = new Schema(
+const paymentSchema = new Schema(
   {
-    name: {
+    receipt: {
       type: String,
-      required: [true, "Name is required"],
-      minlength: 3,
-      maxlength: 255,
+      default: 'none',
+    },
+    note: {
+      type: String,
+      min: 3,
     },
     createdAt: {
       type: Date,
@@ -21,10 +23,9 @@ const workIncludeSchema = new Schema(
     },
   },
   {
-    collection: "workInclude",
+    collection: "payment",
   }
 );
 
-
 //Export modules
-module.exports = mongoose.model("workInclude", workIncludeSchema);
+module.exports = mongoose.model("payment", paymentSchema);
