@@ -1,5 +1,5 @@
 //Import data
-const {adminModel} = require("../../models");
+const {adminModel} = require("../../model");
 
 //Module exports
 module.exports = {

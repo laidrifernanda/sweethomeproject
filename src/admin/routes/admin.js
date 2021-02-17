@@ -2,10 +2,10 @@
 const router = require("express").Router();
 
 //Controller
-const authController = require("../controllers/auth");
+const authController = require("../controller/auth");
 
 //Middleware
-const authMiddleware = require("../middlewares/auth");
+const authMiddleware = require("../middleware/auth");
 
 //Routes
 router.post(

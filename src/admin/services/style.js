@@ -1,5 +1,5 @@
 //Import model
-const {stylesModel} = require('../../models');
+const {stylesModel} = require('../../model');
 
 //Module exports
 module.exports = {

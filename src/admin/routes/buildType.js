@@ -2,10 +2,10 @@
 const router = require("express").Router();
 
 //Controller
-const buildTypeController = require("../controllers/buildType");
+const buildTypeController = require("../controller/buildType");
 
 //Middleware
-const buildTypeMiddleware = require("../middlewares/content");
+const buildTypeMiddleware = require("../middleware/content");
 
 //Routes
 router.get("/buildType",  buildTypeController.browse);

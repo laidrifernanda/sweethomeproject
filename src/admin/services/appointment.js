@@ -1,0 +1,41 @@
+//Import data
+const { appointmentModel } = require("../../model");
+
+//Module exports
+module.exports = {
+  find: async (page, limit) => {
+    return await appointmentModel
+      .find()
+      .populate({ path: "locations", select: "name" })
+      .populate({ path: "serviceType", select: "name" })
+      .populate({ path: "user", select: ["id", "firstname", "lastname"] })
+      .populate({ path: "timeslot", select: ["id", "start", "end"] })
+      .limit(limit)
+      .skip((page - 1) * limit)
+      .select(["id", "createdAt", "date", "timeslot", "status"])
+      .exec();
+  },
+  findId: async (id) => {
+    return await appointmentModel
+      .findById(id)
+      .populate({ path: "locations" })
+      .populate({ path: "serviceType" })
+      .populate({
+        path: "user",
+        select: ["id", "firstname", "lastname", "email"],
+      })
+      .populate({ path: "buildType" })
+      .populate({ path: "styles" })
+      .populate({ path: "timeslot" });
+  },
+  edit: async (id, statusData) => {
+    return await appointmentModel.findByIdAndUpdate(id, statusData, {new: true});
+  },
+  getPagination: async (page, limit) => {
+    const totalItem = await appointmentModel.countDocuments();
+    const activePage = page;
+    const totalPage = Math.ceil(totalItem / limit);
+
+    return { totalItem, activePage, totalPage };
+  },
+};

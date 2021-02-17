@@ -15,6 +15,7 @@ require ('./src/passports/fbPassport.js')
 const app = express();
 
 //Import routes
+const adminRoutes = require('./src/admin/routes')
 const router = require('./src/routes')
 
 //Import data
@@ -47,6 +48,10 @@ app.use("/api/v1/admin", adminRoutes.buildTypeRoutes);
 app.use("/api/v1/admin", adminRoutes.locationRoutes);
 app.use("/api/v1/admin", adminRoutes.projectTypeRoutes);
 app.use("/api/v1/admin", adminRoutes.serviceTypeRoutes);
+app.use("/api/v1/admin", adminRoutes.showcaseTypeRoutes);
+app.use("/api/v1/admin", adminRoutes.timeslotRoutes);
+app.use("/api/v1/admin", adminRoutes.customerRoutes);
+app.use("/api/v1/admin", adminRoutes.appointmentRoutes);
 
 //User
 app.use(router.usersRoutes);
