@@ -1,6 +1,7 @@
 //Import dependencies
 const router = require("express").Router();
 const passport = require('passport')
+const appointmentRouter = require('./appointmentRouter')
 
 //Controller
 const userController = require("../controllers/user");
@@ -13,7 +14,7 @@ const isLoggedIn = require('../middlewares/passportMiddleware')
 
 //Routes
 router.use("/users", userController);
-
+router.use("/users", appointmentRouter)
 
 //google auth routes
 // Auth Routes

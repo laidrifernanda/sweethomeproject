@@ -1,4 +1,5 @@
 //Import dependencies
+const betterId = require('mongoose-better-id')
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -7,7 +8,7 @@ const appointmentSchema = new Schema(
   {
     ticket: {
       type: String,
-      default: "#00001",
+      default: "#A-001",
       unique: true,
       minlength: 3,
       maxlength: 8,
@@ -29,7 +30,7 @@ const appointmentSchema = new Schema(
       required: [true, "Address is required"],
     },
     date: {
-      type: String,
+      type: Date,
       required: [true, "Date is required"],
     },
     note: {
@@ -86,6 +87,20 @@ const appointmentSchema = new Schema(
     collection: "appointment",
   }
 );
+
+appointmentSchema.plugin(betterId, {
+  connection: mongoose.connection,
+  field: "ticket",
+  prefix: "#A-",
+  suffix: {
+    start: 000,
+    step: 001,
+    max: 100,
+  },
+  timestamp: {
+    enable: false,
+  },
+});
 
 //Export modules
 module.exports = mongoose.model("appointment", appointmentSchema);
