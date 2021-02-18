@@ -54,7 +54,7 @@ user.post("/login", async (req, res) => {
   }, process.env.SALT_KEY)
   res.send({
     status: 200,
-    data: token,
+    token: token,
   })
   } catch (error) {
     res.status(statusCode).json({message: error.message});

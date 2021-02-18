@@ -16,7 +16,7 @@ const galeryModel = require("./galery");
 const favoriteModel = require("./favorite");
 const cancelModel = require("./cancel");
 const buildTypeModel = require("./buildType");
-const appointementModel = require("./appointment");
+const appointmentModel = require("./appointment");
 
 //Module exports
 module.exports = {
@@ -37,5 +37,5 @@ module.exports = {
   favoriteModel,
   cancelModel,
   buildTypeModel,
-  appointementModel,
+  appointmentModel,
 };
