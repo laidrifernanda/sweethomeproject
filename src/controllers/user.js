@@ -49,6 +49,9 @@ user.post("/login", async (req, res) => {
       statusCode = 400;
       throw new Error("Password invalid");
     }
+
+    userModel.updateOne({_id: users._id}, {activity: new Date()})
+
     const token = jwt.sign({
       id: users._id, email: users.email,
   }, process.env.SALT_KEY)
