@@ -1,5 +1,6 @@
 //Import dependencies
 const mongoose = require("mongoose");
+const betterId = require("mongoose-better-id");
 const Schema = mongoose.Schema;
 
 //Table
@@ -7,7 +8,6 @@ const projectSchema = new Schema(
   {
     ticket: {
       type: String,
-      default: "#P-001",
       unique: true,
       minlength: 3,
       maxlength: 8,
@@ -15,17 +15,39 @@ const projectSchema = new Schema(
     status: {
       type: String,
       default: "Waiting Payment",
-      enum: ["Waiting Payment", "On Going", "Cancelled","Done","Cancelled Requested"],
+      enum: [
+        "Waiting Payment",
+        "On Going",
+        "Cancelled",
+        "Done",
+        "Cancelled Requested",
+      ],
       minlength: 3,
     },
-    user:{
-      type: Schema.Types.ObjectId,
-      ref: "users"
+    receipt: {
+      type: String,
+      default: "none",
     },
-    appointment:{
-      type: Schema.Types.ObjectId,
-      ref: "appointment"
+    totalDuration: {
+      type: Number,
     },
+    totalPrice: {
+      type: Number,
+    },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "users",
+    },
+    appointment: {
+      type: Schema.Types.ObjectId,
+      ref: "appointment",
+    },
+    packages: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "package",
+      },
+    ],
     createdAt: {
       type: Date,
       default: Date.now,
@@ -40,5 +62,18 @@ const projectSchema = new Schema(
   }
 );
 
+projectSchema.plugin(betterId, {
+  connection: mongoose.connection,
+  field: "ticket",
+  prefix: "#P-",
+  suffix: {
+    start: 000,
+    step: 001,
+    max: 100,
+  },
+  timestamp: {
+    enable: false,
+  },
+});
 //Export modules
 module.exports = mongoose.model("project", projectSchema);

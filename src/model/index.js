@@ -10,7 +10,7 @@ const serviceTypeModel = require("./serviceType");
 const projectTypeModel = require("./projectType");
 const projectModel = require("./project");
 const paymentModel = require("./payment");
-const packageTableModel = require("./packageTable");
+const packageModel = require("./package");
 const locationModel = require("./location");
 const galeryModel = require("./galery");
 const favoriteModel = require("./favorite");
@@ -31,7 +31,7 @@ module.exports = {
   projectTypeModel,
   projectModel,
   paymentModel,
-  packageTableModel,
+  packageModel,
   locationModel,
   galeryModel,
   favoriteModel,

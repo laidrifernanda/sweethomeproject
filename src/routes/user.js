@@ -1,52 +1,15 @@
 //Import dependencies
 const router = require("express").Router();
-const passport = require('passport')
-const appointmentRouter = require('./appointmentRouter')
 
 //Controller
-const userController = require("../controllers/user");
-const googleController = require('../controllers/googleController')
+const userController = require("../controllers/auth");
 
 //Middleware
-// const authMiddleware = require("../middlewares/auth");
-// const roleMiddleware = require("../middlewares/role");
-const isLoggedIn = require('../middlewares/passportMiddleware')
+const authMiddleware = require("../middlewares/auth")
 
 //Routes
-router.use("/users", userController);
-router.use("/users", appointmentRouter)
-
-//google auth routes
-// Auth Routes
-router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-
-router.get('/auth/google/callback', 
-    passport.authenticate('google', 
-    { failureRedirect: '/login' }),
-    googleController.home
-);
-
-//facebook auth routes
-router.get('/facebook', passport.authenticate('facebook', { scope : 'email' }));
-
-router.get('/facebook/callback',
-		passport.authenticate('facebook', {
-			successRedirect : '/home',
-			failureRedirect : '/login'
-		}));
-
-
-//router masih percobaan
-router.get('/logout', googleController.logout)
-
-router.get("/login", (req, res) => {
-    res.send("tempat buat login")
-})
-
-router.get('/home', isLoggedIn, (req, res) => {
-    res.send("masuk home")
-})
-
+router.post("/register", authMiddleware.validateRegister,userController.register);
+router.post("/login", authMiddleware.validateLogin, userController.login);
 
 //Module exports
 module.exports = router;

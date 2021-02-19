@@ -11,6 +11,12 @@ const serviceTypeSchema = new Schema(
       minlength: 3,
       maxlength: 255,
     },
+    timeslots: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "timeslot",
+      },
+    ],
     createdAt: {
       type: Date,
       default: Date.now,

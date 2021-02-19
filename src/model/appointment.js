@@ -50,10 +50,6 @@ const appointmentSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "serviceType",
     },
-    durationType: {
-      type: Schema.Types.ObjectId,
-      ref: "durationType",
-    },
     locations: [
       {
         type: Schema.Types.ObjectId,
