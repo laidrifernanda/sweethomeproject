@@ -17,7 +17,6 @@ module.exports = {
       ...timeslotData,
       serviceType: serviceTypeId,
     });
-
     serviceType.timeslots.push(timeslot);
     await serviceType.save();
     return await timeslot.save();

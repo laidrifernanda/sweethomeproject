@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 //Table
-const packageTableSchema = new Schema(
+const packageSchema = new Schema(
   {
     duration: {
       type: Number,
@@ -39,9 +39,9 @@ const packageTableSchema = new Schema(
     },
   },
   {
-    collection: "packageTable",
+    collection: "package",
   }
 );
 
 //Export modules
-module.exports = mongoose.model("packageTable", packageTableSchema);
+module.exports = mongoose.model("package", packageSchema);

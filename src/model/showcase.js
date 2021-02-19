@@ -20,16 +20,26 @@ const showcaseSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "showcaseType",
     },
-    projects: [
+    project: {
+      type: Schema.Types.ObjectId,
+      ref: "project",
+    },
+    projectTypes: [
       {
         type: Schema.Types.ObjectId,
-        ref: "project",
+        ref: "projectType",
       },
     ],
     styles: [
       {
         type: Schema.Types.ObjectId,
         ref: "style",
+      },
+    ],
+    gallery: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "galery",
       },
     ],
     createdAt: {
