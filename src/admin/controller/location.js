@@ -5,12 +5,12 @@ const locationService = require("../services/location");
 module.exports = {
   browse: async (req, res) => {
     // destructure page and limit and set default values
-    const { page = 1 } = req.query;
+    const { page = 1 , limit = 10} = req.query;
     try {
-      const location = await locationService.find(page);
+      const location = await locationService.find(page, limit);
 
       //get total documents
-      const pageInfo = await locationService.getPagination(page);
+      const pageInfo = await locationService.getPagination(page, limit);
 
       res.status(200).send({ data: location, ...pageInfo });
     } catch (err) {

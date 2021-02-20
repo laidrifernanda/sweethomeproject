@@ -5,12 +5,12 @@ const buildTypeService = require("../services/buildType");
 module.exports = {
   browse: async (req, res) => {
     // destructure page and limit and set default values
-    const { page = 1 } = req.query;
+    const { page = 1 , limit = 10} = req.query;
     try {
-      const buildType = await buildTypeService.find(page);
+      const buildType = await buildTypeService.find(page, limit);
 
       //get total documents
-      const pageInfo = await buildTypeService.getPagination(page);
+      const pageInfo = await buildTypeService.getPagination(page, limit);
 
       res.status(200).send({ data: buildType, ...pageInfo });
     } catch (err) {

@@ -5,12 +5,12 @@ const projectTypeService = require("../services/projectType");
 module.exports = {
   browse: async (req, res) => {
     // destructure page and limit and set default values
-    const { page = 1 } = req.query;
+    const { page = 1, limit = 10 } = req.query;
     try {
-      const projectType = await projectTypeService.find(page);
+      const projectType = await projectTypeService.find(page, limit);
 
       //get total documents
-      const pageInfo = await projectTypeService.getPagination(page);
+      const pageInfo = await projectTypeService.getPagination(page, limit);
 
       res.status(200).send({ data: projectType, ...pageInfo });
     } catch (err) {
@@ -48,8 +48,14 @@ module.exports = {
     const projectTypeData = { ...body };
 
     try {
-      const updateProjectType = await projectTypeService.edit(id, projectTypeData);
-      res.send({ message: "Update Project Type Success", data: updateProjectType });
+      const updateProjectType = await projectTypeService.edit(
+        id,
+        projectTypeData
+      );
+      res.send({
+        message: "Update Project Type Success",
+        data: updateProjectType,
+      });
     } catch (err) {
       res.status(400).json({ error: err.message });
     }
@@ -62,7 +68,10 @@ module.exports = {
 
       res
         .status(200)
-        .send({ message: "Delete Project Type Success", data: deleteProjectType });
+        .send({
+          message: "Delete Project Type Success",
+          data: deleteProjectType,
+        });
     } catch (err) {
       res.status(400).json({ error: err.message });
     }

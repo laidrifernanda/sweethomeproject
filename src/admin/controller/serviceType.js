@@ -5,12 +5,12 @@ const serviceTypeService = require("../services/serviceType");
 module.exports = {
   browse: async (req, res) => {
     // destructure page and limit and set default values
-    const { page = 1 } = req.query;
+    const { page = 1 , limit = 10} = req.query;
     try {
-      const serviceType = await serviceTypeService.find(page);
+      const serviceType = await serviceTypeService.find(page, limit);
 
       //get total documents
-      const pageInfo = await serviceTypeService.getPagination(page);
+      const pageInfo = await serviceTypeService.getPagination(page, limit);
 
       res.status(200).send({ data: serviceType, ...pageInfo });
     } catch (err) {

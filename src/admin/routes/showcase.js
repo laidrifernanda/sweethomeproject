@@ -6,13 +6,14 @@ const showcaseController = require("../controller/showcase");
 
 //Middleware
 const uploadShowcaseMiddleware = require("../middleware/uploadShowcase");
+const authMiddleware = require("../middleware/auth")
 
 //Routes
-// router.get("/showcaseType", showcaseController.browse);
+router.get("/showcase", showcaseController.browse);
 // router.get("/showcaseType/:id", showcaseController.read);
 router.post(
   "/showcase",
-  // showcaseMiddleware.add,
+  authMiddleware.validateToken,
   showcaseController.add
 );
 
