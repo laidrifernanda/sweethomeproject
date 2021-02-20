@@ -18,7 +18,7 @@ module.exports = {
     return await projectType.save();
   },
   edit: async (id, projectTypeData) => {
-    return await projectTypeModel.findByIdAndUpdate(id, projectTypeData, { new: true });
+    return await projectTypeModel.findByIdAndUpdate(id, projectTypeData, { new: true, runValidators: true });
   },
   delete: async (id) => {
     return await projectTypeModel.findByIdAndDelete(id);

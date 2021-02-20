@@ -28,8 +28,11 @@ module.exports = {
       .populate({ path: "styles" })
       .populate({ path: "timeslot" });
   },
-  edit: async (id, statusData) => {
-    return await appointmentModel.findByIdAndUpdate(id, statusData, {new: true});
+  status: async (id, statusData) => {
+    return await appointmentModel.findByIdAndUpdate(id, statusData, {
+      new: true,
+      runValidators: true,
+    });
   },
   getPagination: async (page, limit) => {
     const totalItem = await appointmentModel.countDocuments();

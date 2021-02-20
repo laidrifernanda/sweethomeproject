@@ -21,6 +21,7 @@ router.post(
   uploadReceiptMiddleware.single("receipt"),
   projectController.upload
 );
+router.put("/project/:id/status", projectController.status);
 // router.put(
 //   "/project/:id",
 //   projectMiddleware.edit,

@@ -20,6 +20,7 @@ module.exports = {
   edit: async (id, serviceTypeData) => {
     return await serviceTypeModel.findByIdAndUpdate(id, serviceTypeData, {
       new: true,
+      runValidators: true
     });
   },
   delete: async (id) => {

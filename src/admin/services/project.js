@@ -30,7 +30,7 @@ module.exports = {
     return await projectModel
       .findById(id)
       .populate({ path: "packages" })
-      .populate({ path: "user", select: ["-appointments"] })
+      .populate({ path: "user", select: ["-appointments"] });
   },
   add: async (projectData) => {
     const totalDuration = projectData.packages.reduce(
@@ -59,9 +59,16 @@ module.exports = {
       { new: true }
     );
   },
+  status: async (id, statusData) => {
+    return await projectModel.findByIdAndUpdate(id, statusData, {
+      new: true,
+      runValidators: true,
+    });
+  },
   edit: async (id, projectTypeData) => {
     return await projectModel.findByIdAndUpdate(id, projectTypeData, {
       new: true,
+      runValidators: true,
     });
   },
   delete: async (id) => {

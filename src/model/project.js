@@ -17,7 +17,6 @@ const projectSchema = new Schema(
     },
     status: {
       type: String,
-      default: "Waiting Payment",
       enum: [
         "Waiting Payment",
         "On Going",
@@ -25,6 +24,7 @@ const projectSchema = new Schema(
         "Done",
         "Cancelled Requested",
       ],
+      default: "Waiting Payment",
       minlength: 3,
     },
     receipt: {

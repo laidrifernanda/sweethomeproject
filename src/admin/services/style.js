@@ -18,7 +18,7 @@ module.exports = {
     return await style.save();
   },
   edit: async (id, styleData) => {
-    return await stylesModel.findByIdAndUpdate(id, styleData, { new: true });
+    return await stylesModel.findByIdAndUpdate(id, styleData, { new: true, runValidators: true });
   },
   delete: async (id) => {
     return await stylesModel.findByIdAndDelete(id);

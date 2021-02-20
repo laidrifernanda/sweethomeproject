@@ -55,6 +55,20 @@ module.exports = {
       res.status(400).json({ error: err.message });
     }
   },
+  status: async (req, res) => {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    //Update category
+    const statusData = { status: status };
+
+    try {
+      const udpateStatus = await projectService.status(id, statusData);
+      res.send({ message: "Update status Success", data: udpateStatus });
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  },
   edit: async (req, res) => {
     const { body } = req;
     const { id } = req.params;

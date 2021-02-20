@@ -18,7 +18,7 @@ module.exports = {
     return await location.save();
   },
   edit: async (id, locationData) => {
-    return await locationModel.findByIdAndUpdate(id, locationData, { new: true });
+    return await locationModel.findByIdAndUpdate(id, locationData, { new: true, runValidators: true });
   },
   delete: async (id) => {
     return await locationModel.findByIdAndDelete(id);
