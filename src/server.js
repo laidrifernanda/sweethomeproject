@@ -28,7 +28,8 @@ const {
   customerRoutes,
   appointmentAdminRoutes,
   projectRoutes,
-  showcaseRoutes} = require('./admin/routes')
+  showcaseRoutes,
+  calendarRoutes} = require('./admin/routes')
 const {authRoutes, userAuthRoutes, appointmentRoutes} = require('./routes')
 
 //Import data
