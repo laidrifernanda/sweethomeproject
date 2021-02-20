@@ -3,11 +3,11 @@ const { serviceTypeModel } = require("../../model");
 
 //Module exports
 module.exports = {
-  find: async (page) => {
+  find: async (page, limit) => {
     return await serviceTypeModel
       .find()
-      .limit(10)
-      .skip((page - 1) * 10)
+      .limit(limit)
+      .skip((page - 1) * limit)
       .exec();
   },
   findId: async (id) => {
@@ -26,10 +26,10 @@ module.exports = {
   delete: async (id) => {
     return await serviceTypeModel.findByIdAndDelete(id);
   },
-  getPagination: async (page) => {
+  getPagination: async (page, limit) => {
     const totalItem = await serviceTypeModel.countDocuments();
     const activePage = page;
-    const totalPage = Math.ceil(totalItem / 10);
+    const totalPage = Math.ceil(totalItem / limit);
 
     return { totalItem, activePage, totalPage };
   },

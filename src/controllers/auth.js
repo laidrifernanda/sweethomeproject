@@ -42,7 +42,7 @@ module.exports = {
       const isUser = await authService.findEmail(email);
       const isAdmin = await authService.findAdmin(email);
       if (!isUser && !isAdmin) return res.status(400).send("Invalid email");
-
+      
       //Checking if password is correct
       const hashedPass = isAdmin ? isAdmin.password : isUser.password
       const isPassValid = await bcrypt.compare(password, hashedPass);

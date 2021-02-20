@@ -36,7 +36,7 @@ const showcaseSchema = new Schema(
     styles: [
       {
         type: Schema.Types.ObjectId,
-        ref: "style",
+        ref: "styles",
       },
     ],
     gallery: [
@@ -51,9 +51,14 @@ const showcaseSchema = new Schema(
         ref: "favorite",
       },
     ],
+    admin: 
+      {
+        type: Schema.Types.ObjectId,
+        ref: "admin",
+      },
     show: {
       type: Boolean,
-      default: true
+      default: true,
     },
     createdAt: {
       type: Date,

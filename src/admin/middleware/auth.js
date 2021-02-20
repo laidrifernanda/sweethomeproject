@@ -47,7 +47,7 @@ module.exports = {
 
     try {
       const verified = jwt.verify(authenticate, SECRET_KEY_TOKEN);
-      req.user = verified;
+      req.admin = verified;
       next();
     } catch (err) {
       res.status(400).send("Invalid Token");
