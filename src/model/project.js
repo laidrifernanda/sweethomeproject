@@ -3,6 +3,9 @@ const mongoose = require("mongoose");
 const betterId = require("mongoose-better-id");
 const Schema = mongoose.Schema;
 
+//Import model
+// const {paymentModel: payment, cancelModel: cancel, packageModel: package} = require("../model")
+
 //Table
 const projectSchema = new Schema(
   {
@@ -48,6 +51,14 @@ const projectSchema = new Schema(
         ref: "package",
       },
     ],
+    cancelPayment: {
+      type: Schema.Types.ObjectId,
+      ref: "cancel",
+    },
+    payment: {
+      type: Schema.Types.ObjectId,
+      ref: "payment",
+    },
     createdAt: {
       type: Date,
       default: Date.now,
@@ -77,7 +88,9 @@ projectSchema.plugin(betterId, {
 });
 
 // projectSchema.post("delete", (project) => {
-//   reviews.deleteMany({ _id: { $in: project.reviews } });
+//   payment.delete({ _id: project.payment });
+//   cancel.delete({ _id: project.cancelPayment  });
+//   package.deleteMany({ _id: { $in: project.packages } });
 // });
 
 //Export modules
