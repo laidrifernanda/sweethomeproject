@@ -6,13 +6,31 @@ module.exports = {
   find: async (page, limit) => {
     return await projectModel
       .find()
-      .populate({ path: "package" })
+      .populate({
+        path: "packages",
+        populate: [
+          { path: "location", select: ["name"] },
+          { path: "projectType", select: ["name"] },
+        ],
+        select: ["populate"],
+      })
+      .populate({ path: "user", select: ["firstname", "lastname"] })
       .limit(limit)
       .skip((page - 1) * limit)
+      .select([
+        "totalDuration",
+        "totalPrice",
+        "createdAt",
+        "updatedAt",
+        "status",
+      ])
       .exec();
   },
   findId: async (id) => {
-    return await projectModel.findById(id);
+    return await projectModel
+      .findById(id)
+      .populate({ path: "packages" })
+      .populate({ path: "user", select: ["-appointments"] })
   },
   add: async (projectData) => {
     const totalDuration = projectData.packages.reduce(

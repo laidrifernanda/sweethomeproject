@@ -9,7 +9,7 @@ const uploadReceiptMiddleware = require("../middleware/uploadReceipt");
 
 //Routes
 router.get("/project", projectController.browse);
-// router.get("/project/:id", projectController.read);
+router.get("/project/:id", projectController.read);
 router.post(
   "/project",
   // projectMiddleware.add,
