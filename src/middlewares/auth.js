@@ -15,7 +15,7 @@ module.exports = {
     const schema = joi.object({
       firstname: joi.string().required().min(3),
       lastname: joi.string().required().min(3),
-      email: joi.string().required(),
+      email: joi.string().required().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
       password: joi.string().required(),
     });
     const validation = schema.validate(body);
@@ -29,7 +29,7 @@ module.exports = {
   validateLogin: (req, res, next) => {
     const { body } = req;
     const schema = joi.object({
-      email: joi.string().required(),
+      email: joi.string().required().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
       password: joi.string().required(),
     });
 

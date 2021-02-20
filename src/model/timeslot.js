@@ -8,10 +8,12 @@ const timeslotSchema = new Schema(
     start: {
       type: String,
       required: [true, "Start is required"],
+      match: [/(2[0-3]|[01][0-9]):[0-5][0-9]/, "Please enter valid time"]
     },
     end: {
       type: String,
       required: [true, "End is required"],
+      match: [/(2[0-3]|[01][0-9]):[0-5][0-9]/, "Please enter valid time"]
     },
     quota: {
       type: Number,
