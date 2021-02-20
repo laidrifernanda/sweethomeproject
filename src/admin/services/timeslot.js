@@ -22,7 +22,7 @@ module.exports = {
     return await timeslot.save();
   },
   edit: async (id, timeslotData) => {
-    return timeslotModel.findByIdAndUpdate(id, timeslotData, { new: true });
+    return timeslotModel.findByIdAndUpdate(id, timeslotData, { new: true , runValidators: true});
   },
   delete: async (id) => {
     return timeslotModel.findByIdAndRemove(id);

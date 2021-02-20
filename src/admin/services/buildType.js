@@ -18,7 +18,7 @@ module.exports = {
     return await buildType.save();
   },
   edit: async (id, buildTypeData) => {
-    return await buildTypeModel.findByIdAndUpdate(id, buildTypeData, { new: true });
+    return await buildTypeModel.findByIdAndUpdate(id, buildTypeData, { new: true, runValidators: true });
   },
   delete: async (id) => {
     return await buildTypeModel.findByIdAndDelete(id);

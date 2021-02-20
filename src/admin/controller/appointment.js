@@ -33,7 +33,7 @@ module.exports = {
     const statusData = { status: status };
 
     try {
-      const udpateStatus = await appointmentService.edit(id, statusData);
+      const udpateStatus = await appointmentService.status(id, statusData);
       res.send({ message: "Update status Success", data: udpateStatus });
     } catch (err) {
       res.status(400).json({ error: err.message });
