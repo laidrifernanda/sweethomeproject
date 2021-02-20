@@ -14,6 +14,10 @@ const cancelSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "project"
     },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "users"
+    },
     createdAt: {
       type: Date,
       default: Date.now,
