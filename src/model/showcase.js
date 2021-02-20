@@ -42,6 +42,10 @@ const showcaseSchema = new Schema(
         ref: "galery",
       },
     ],
+    show: {
+      type: Boolean,
+      default: true
+    },
     createdAt: {
       type: Date,
       default: Date.now,
