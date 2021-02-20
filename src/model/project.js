@@ -75,5 +75,10 @@ projectSchema.plugin(betterId, {
     enable: false,
   },
 });
+
+// projectSchema.post("delete", (project) => {
+//   reviews.deleteMany({ _id: { $in: project.reviews } });
+// });
+
 //Export modules
 module.exports = mongoose.model("project", projectSchema);
