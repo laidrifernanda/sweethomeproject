@@ -27,7 +27,7 @@
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0"
   },
-  "devhttps://dbdiagram.io/d/601561f880d742080a3875f0Dependencies": {},
+  "dev": {},
   "scripts": {
     "test": "DEBUG=true nyc mocha tests/*.js --exit --inspect=0.0.0.0:9229 --timeout 120000",
     "start": "nodemon  index.js",

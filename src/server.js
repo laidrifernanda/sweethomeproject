@@ -1,16 +1,16 @@
 //Import dependencies
 require("dotenv").config();
-const express = require('express');
+const express = require("express");
 const bodyParser = require("body-parser");
-const passport = require('passport')
-const cookieSession = require('cookie-session')
+const passport = require("passport");
+const cookieSession = require("cookie-session");
 const morgan = require("morgan");
-const cors = require('cors');
+const cors = require("cors");
 
 //Require google passport setup
-require('./passports/googlePassport')
+require("./passports/googlePassport");
 //Require fb passport setup
-require ('./passports/fbPassport')
+require("./passports/fbPassport");
 
 //Express
 const app = express();
@@ -29,18 +29,21 @@ const {
   appointmentAdminRoutes,
   projectRoutes,
   showcaseRoutes,
-  calendarRoutes} = require('./admin/routes')
-const {authRoutes, userAuthRoutes, appointmentRoutes} = require('./routes')
+  calendarRoutes,
+} = require("./admin/routes");
+const { authRoutes, userAuthRoutes, appointmentRoutes } = require("./routes");
 
 //Import data
 const { PATH_ADMIN, PATH_USER } = process.env;
 const db = require("./config/database");
 
 //Cookie Session
-app.use(cookieSession({
-    name: 'tuto-session',
-    keys: ['key1', 'key2']
-  }))
+app.use(
+  cookieSession({
+    name: "tuto-session",
+    keys: ["key1", "key2"],
+  })
+);
 
 //BodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -72,9 +75,9 @@ app.use(PATH_ADMIN, projectRoutes);
 app.use(PATH_ADMIN, showcaseRoutes);
 
 //User
-app.use(PATH_USER,authRoutes);
-app.use(PATH_USER,userAuthRoutes);
-app.use(PATH_USER,appointmentRoutes);
+app.use(PATH_USER, authRoutes);
+app.use(PATH_USER, userAuthRoutes);
+app.use(PATH_USER, appointmentRoutes);
 
 //Module Exports
 module.exports = app;
