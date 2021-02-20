@@ -13,6 +13,14 @@ const paymentSchema = new Schema(
       type: String,
       min: 3,
     },
+    project: {
+      type: Schema.Types.ObjectId,
+      ref: "project"
+    },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "users"
+    },
     createdAt: {
       type: Date,
       default: Date.now,
