@@ -2,6 +2,9 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+//Import model
+// const {favoriteModel: favorite , galeryModel: gallery} = require("../model")
+
 //Table
 const showcaseSchema = new Schema(
   {
@@ -42,6 +45,12 @@ const showcaseSchema = new Schema(
         ref: "galery",
       },
     ],
+    favorites: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "favorite",
+      },
+    ],
     show: {
       type: Boolean,
       default: true
@@ -59,6 +68,11 @@ const showcaseSchema = new Schema(
     collection: "showcase",
   }
 );
+
+// showcaseSchema.post("delete", (project) => {
+//   favorite.deleteMany({ _id: {$in: project.favorites} });
+//   galery.deleteMany({ _id: {$in: project.gallery}  });
+// });
 
 //Export modules
 module.exports = mongoose.model("showcase", showcaseSchema);

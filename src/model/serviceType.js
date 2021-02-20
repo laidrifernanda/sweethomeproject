@@ -31,6 +31,9 @@ const serviceTypeSchema = new Schema(
   }
 );
 
+// serviceTypeSchema.post("delete", (project) => {
+//   timeslot.deleteMany({ _id: {$in: project.timeslots} });
+// });
 
 //Export modules
 module.exports = mongoose.model("serviceType", serviceTypeSchema);
