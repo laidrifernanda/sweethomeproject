@@ -8,9 +8,9 @@ const serviceTypeRoutes = require("./serviceType");
 const showcaseTypeRoutes = require("./showcaseType");
 const timeslotRoutes = require("./timeslot");
 const customerRoutes = require("./customer");
-const appointmentAdminRoutes = require("./appointment")
-const projectRoutes = require('./project')
-const showcaseRoutes = require("./showcase")
+const appointmentAdminRoutes = require("./appointment");
+const projectRoutes = require('./project');
+const showcaseRoutes = require("./showcase");
 
 //Module exports
 module.exports = {
@@ -25,5 +25,5 @@ module.exports = {
   customerRoutes,
   appointmentAdminRoutes,
   projectRoutes,
-  showcaseRoutes
+  showcaseRoutes,
 };

@@ -40,7 +40,7 @@ const appointmentSchema = new Schema(
     status: {
       type: String,
       default: 'Waiting Approval',
-      enum: ['Waiting Approval','Done','Scheduled', 'Declined']
+      enum: ['Waiting Approval','Done','Scheduled', 'Declined', 'Closed']
     },
     buildType: {
       type: Schema.Types.ObjectId,
