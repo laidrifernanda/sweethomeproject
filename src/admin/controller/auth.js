@@ -63,4 +63,48 @@ module.exports = {
       res.status(400).json({ error: err.message });
     }
   },
+  browse: async (req, res) => {
+    // destructure page and limit and set default values
+    const { page = 1 , limit = 10} = req.query;
+    try {
+      const adminInfo = await adminService.browse(page, limit);
+
+      //get total documents
+      const pageInfo = await adminService.getPagination(page, limit);
+
+      res.status(200).send({ data: adminInfo, ...pageInfo });
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  },
+  edit: async (req, res) => {
+    const { body } = req;
+    const { id } = req.params;
+    //Hash pass
+    const salt = await bcrypt.genSalt(10);
+    const hashedpass = await bcrypt.hash(body.password, salt);
+
+    //Update category
+    const adminData = { ...body, password: hashedpass };
+
+    try {
+      const updateAdmin = await adminService.edit(id, adminData);
+      res.send({ message: "Update Data Admin Success", data: updateAdmin });
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  },
+  delete: async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      const deleteAdmin = await adminService.delete(id);
+
+      res
+        .status(200)
+        .send({ message: "Delete Data Admin Success", data: deleteAdmin });
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  },
 };

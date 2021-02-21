@@ -6,17 +6,36 @@ const serviceTypeController = require("../controller/serviceType");
 
 //Middleware
 const serviceTypeMiddleware = require("../middleware/content");
+const authMiddleware = require("../middleware/auth");
 
 //Routes
-router.get("/serviceType", serviceTypeController.browse);
-router.get("/serviceType/:id", serviceTypeController.read);
-router.post("/serviceType", serviceTypeMiddleware.add, serviceTypeController.add);
+router.get(
+  "/serviceType",
+  authMiddleware.validateToken,
+  serviceTypeController.browse
+);
+router.get(
+  "/serviceType/:id",
+  authMiddleware.validateToken,
+  serviceTypeController.read
+);
+router.post(
+  "/serviceType",
+  authMiddleware.validateToken,
+  serviceTypeMiddleware.add,
+  serviceTypeController.add
+);
 router.put(
   "/serviceType/:id",
+  authMiddleware.validateToken,
   serviceTypeMiddleware.edit,
   serviceTypeController.edit
 );
-router.delete("/serviceType/:id", serviceTypeController.delete);
+router.delete(
+  "/serviceType/:id",
+  authMiddleware.validateToken,
+  serviceTypeController.delete
+);
 
 //Module exports
 module.exports = router;

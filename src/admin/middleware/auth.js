@@ -14,7 +14,7 @@ module.exports = {
     const { body } = req;
     const schema = joi.object({
       name: joi.string().required().min(3),
-      email: joi.string().required(),
+      email: joi.string().required().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
       password: joi.string().required(),
     });
     const validation = schema.validate(body);
@@ -28,7 +28,7 @@ module.exports = {
   validateLogin: (req, res, next) => {
     const { body } = req;
     const schema = joi.object({
-      email: joi.string().required(),
+      email: joi.string().required().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
       password: joi.string().required(),
     });
 
@@ -52,5 +52,22 @@ module.exports = {
     } catch (err) {
       res.status(400).send("Invalid Token");
     }
+  },
+  update: (req, res, next) => {
+    const { body } = req;
+    const schema = joi.object({
+      name: joi.string().required(),
+      email: joi.string().required().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
+      password: joi.string().required(),
+    });
+
+    const validation = schema.validate(body);
+
+    if (!validation.error) next();
+    else
+      res.status(500).send({
+        error: validation.error.details[0].message,
+        message: "Failed validation",
+      });
   },
 };
