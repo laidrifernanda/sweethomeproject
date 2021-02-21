@@ -80,7 +80,7 @@ app.use(PATH_ADMIN, dashboardRoutes);
 app.use(PATH_USER, authRoutes);
 app.use(PATH_USER, userAuthRoutes);
 app.use(PATH_USER, appointmentRoutes);
+app.use(PATH_USER,updateUserRoutes)
 
-//asds
 //Module Exports
 module.exports = app;
