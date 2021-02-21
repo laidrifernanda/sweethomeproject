@@ -29,7 +29,7 @@ const {
   appointmentAdminRoutes,
   projectRoutes,
   showcaseRoutes,
-  calendarRoutes,
+  dashboardRoutes,
 } = require("./admin/routes");
 const { authRoutes, userAuthRoutes, appointmentRoutes } = require("./routes");
 
@@ -73,6 +73,8 @@ app.use(PATH_ADMIN, customerRoutes);
 app.use(PATH_ADMIN, appointmentAdminRoutes);
 app.use(PATH_ADMIN, projectRoutes);
 app.use(PATH_ADMIN, showcaseRoutes);
+app.use(PATH_ADMIN, dashboardRoutes);
+
 
 //User
 app.use(PATH_USER, authRoutes);

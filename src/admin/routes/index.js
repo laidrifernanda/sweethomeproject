@@ -11,6 +11,7 @@ const customerRoutes = require("./customer");
 const appointmentAdminRoutes = require("./appointment");
 const projectRoutes = require('./project');
 const showcaseRoutes = require("./showcase");
+const dashboardRoutes = require("./dashboard")
 
 //Module exports
 module.exports = {
@@ -26,4 +27,5 @@ module.exports = {
   appointmentAdminRoutes,
   projectRoutes,
   showcaseRoutes,
+  dashboardRoutes,
 };
