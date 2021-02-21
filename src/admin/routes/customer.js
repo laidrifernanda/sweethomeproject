@@ -5,10 +5,19 @@ const router = require("express").Router();
 const customerController = require("../controller/customer");
 
 //Middleware
+const authMiddleware = require("../middleware/auth");
 
 //Routes
-router.get("/customer", customerController.browse);
-router.get("/customer/:id", customerController.read);
+router.get(
+  "/customer",
+  authMiddleware.validateToken,
+  customerController.browse
+);
+router.get(
+  "/customer/:id",
+  authMiddleware.validateToken,
+  customerController.read
+);
 
 //Module exports
 module.exports = router;

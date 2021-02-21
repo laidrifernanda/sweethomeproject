@@ -1,5 +1,5 @@
 //Import data
-const {adminModel} = require("../../model");
+const { adminModel } = require("../../model");
 
 //Module exports
 module.exports = {
@@ -17,6 +17,15 @@ module.exports = {
     //Create new user
     const user = new adminModel(adminData);
     return await user.save();
+  },
+  edit: async (id, adminData) => {
+    return await adminModel.findByIdAndUpdate(id, adminData, {
+      new: true,
+      runValidators: true,
+    });
+  },
+  delete: async (id) => {
+    return await adminModel.findByIdAndDelete(id);
   },
   getPagination: async (page, limit) => {
     const totalItem = await adminModel.countDocuments();

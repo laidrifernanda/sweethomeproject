@@ -6,20 +6,21 @@ const showcaseController = require("../controller/showcase");
 
 //Middleware
 const uploadShowcaseMiddleware = require("../middleware/uploadShowcase");
-const authMiddleware = require("../middleware/auth")
+const authMiddleware = require("../middleware/auth");
 
 //Routes
-router.get("/showcase", showcaseController.browse);
-// router.get("/showcaseType/:id", showcaseController.read);
-router.post(
+router.get(
   "/showcase",
   authMiddleware.validateToken,
-  showcaseController.add
+  showcaseController.browse
 );
+// router.get("/showcaseType/:id", showcaseController.read);
+router.post("/showcase", authMiddleware.validateToken, showcaseController.add);
 
 router.post(
   "/showcase/upload",
-  uploadShowcaseMiddleware.single('galery'),
+  authMiddleware.validateToken,
+  uploadShowcaseMiddleware.single("galery"),
   showcaseController.upload
 );
 

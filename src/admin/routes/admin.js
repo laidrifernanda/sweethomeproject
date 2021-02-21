@@ -8,14 +8,32 @@ const authController = require("../controller/auth");
 const authMiddleware = require("../middleware/auth");
 
 //Routes
+router.get(
+  "/",
+  authMiddleware.validateToken,
+  authController.browse
+);
 router.post(
   "/register",
+  authMiddleware.validateToken,
   authMiddleware.validateRegister,
   authController.register
 );
+router.put("/:id",
+  authMiddleware.validateToken,
+  authMiddleware.update,
+  authController.edit
+);
+router.delete("/:id",
+  authMiddleware.validateToken,
+  authController.delete
+);
+router.get(
+  "/logout",
+  authMiddleware.validateToken,
+  authController.logout,
+);
+  
 // router.post("/login", authMiddleware.validateLogin, authController.login);
-router.put("/edit");
-router.delete("/delete");
-
 //Module exports
 module.exports = router;

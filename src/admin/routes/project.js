@@ -6,22 +6,28 @@ const projectController = require("../controller/project");
 
 //Middleware
 const uploadReceiptMiddleware = require("../middleware/uploadReceipt");
+const authMiddleware = require("../middleware/auth");
 
 //Routes
-router.get("/project", projectController.browse);
-router.get("/project/:id", projectController.read);
-router.post(
-  "/project",
-  // projectMiddleware.add,
-  projectController.add
-); 
+router.get("/project", authMiddleware.validateToken, projectController.browse);
+router.get(
+  "/project/:id",
+  authMiddleware.validateToken,
+  projectController.read
+);
+router.post("/project", authMiddleware.validateToken, projectController.add);
 
 router.post(
   "/project/:projectId/upload",
+  authMiddleware.validateToken,
   uploadReceiptMiddleware.single("receipt"),
   projectController.upload
 );
-router.put("/project/:id/status", projectController.status);
+router.put(
+  "/project/:id/status",
+  authMiddleware.validateToken,
+  projectController.status
+);
 // router.put(
 //   "/project/:id",
 //   projectMiddleware.edit,
