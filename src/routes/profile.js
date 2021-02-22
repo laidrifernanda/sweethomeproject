@@ -10,6 +10,9 @@ const uploadProfileMiddleware = require('../middlewares/uploadprofile')
 const profileMiddleware = require('../middlewares/profile')
 
 //ROUTES
+router.get("/profile", 
+    authMiddleware.validateToken,
+    profileController.read)
 router.put("/profile", 
     authMiddleware.validateToken,
     profileMiddleware.validateBody,

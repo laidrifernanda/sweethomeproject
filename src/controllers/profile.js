@@ -6,6 +6,16 @@ const profileService = require("../services/profile");
 
 //Module exports
 module.exports = {
+  read: async (req, res) => {
+    try {
+      const { user } = req;
+      const userData = await profileService.findId({_id: user._id});
+
+      res.status(200).send({ data: userData });
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  },
   update: async (req, res) => {
     const { body, user } = req;
     //Hash password
