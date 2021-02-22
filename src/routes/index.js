@@ -1,14 +1,24 @@
 //Import Routes
-const authRoutes = require("./auth");
-const userAuthRoutes = require("./userAuth")
-const appointmentRoutes = require('./appointment')
-const profileRoutes = require("./profile")
+const authRouter = require("./auth");
+const userAuthRouter = require("./userAuth")
+const appointmentRouter = require('./appointment')
+const profileRouter = require("./profile")
+const styleRouter = require("./styles");
+const buildTypeRouter = require("./buildType");
+const locationRouter = require("./location");
+const serviceTypeRouter = require("./serviceType");
+const timeslotRouter = require("./timeslot");
 
 
 //Module exports
 module.exports = {
-  authRoutes,
-  userAuthRoutes,
-  appointmentRoutes,
-  profileRoutes
+  authRouter,
+  userAuthRouter,
+  appointmentRouter,
+  profileRouter,
+  styleRouter,
+  buildTypeRouter,
+  locationRouter,
+  serviceTypeRouter,
+  timeslotRouter
 };

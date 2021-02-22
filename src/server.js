@@ -31,7 +31,15 @@ const {
   showcaseRoutes,
   dashboardRoutes,
 } = require("./admin/routes");
-const { authRoutes, userAuthRoutes, appointmentRoutes,  profileRoutes } = require("./routes");
+const { authRouter,
+  userAuthRouter,
+  appointmentRouter,
+  profileRouter,
+  styleRouter,
+  buildTypeRouter,
+  locationRouter,
+  serviceTypeRouter,
+  timeslotRouter } = require("./routes");
 
 //Import data
 const { PATH_ADMIN, PATH_USER } = process.env;
@@ -77,10 +85,16 @@ app.use(PATH_ADMIN, dashboardRoutes);
 
 
 //User
-app.use(PATH_USER, authRoutes);
-app.use(PATH_USER, userAuthRoutes);
-app.use(PATH_USER, appointmentRoutes);
-app.use(PATH_USER, profileRoutes)
+app.use(PATH_USER, authRouter);
+app.use(PATH_USER, userAuthRouter);
+app.use(PATH_USER, appointmentRouter);
+app.use(PATH_USER, profileRouter);
+app.use(PATH_USER, styleRouter);
+app.use(PATH_USER, buildTypeRouter);
+app.use(PATH_USER, locationRouter);
+app.use(PATH_USER, serviceTypeRouter);
+app.use(PATH_USER, timeslotRouter);
+
 
 //Module Exports
 module.exports = app;
