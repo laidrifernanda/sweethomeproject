@@ -3,6 +3,9 @@ const { userModel } = require("../model");
 
 //Module Exports
 module.exports = {
+  findId: async (id) => {
+    return await userModel.findById(id);
+  },
   update: async (updateUser, userId) => {
 		return await userModel.findByIdAndUpdate(userId, updateUser, {
 			new: true,
