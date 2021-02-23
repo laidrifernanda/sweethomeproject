@@ -8,6 +8,8 @@ const buildTypeRouter = require("./buildType");
 const locationRouter = require("./location");
 const serviceTypeRouter = require("./serviceType");
 const timeslotRouter = require("./timeslot");
+const userShowCaseRouter = require("./showcase");
+
 
 
 //Module exports
@@ -20,5 +22,6 @@ module.exports = {
   buildTypeRouter,
   locationRouter,
   serviceTypeRouter,
-  timeslotRouter
+  timeslotRouter,
+  userShowCaseRouter
 };
