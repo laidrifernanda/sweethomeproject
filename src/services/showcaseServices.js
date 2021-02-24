@@ -114,4 +114,13 @@ module.exports = {
     const totalPage = Math.ceil(totalItem / limit);
     return { totalItem, activePage, totalPage };
   },
+  getPaginationByProject: async (page, limit, status) => {
+    const idShowcaseType = await showcaseTypeModel.findOne({ name: status });
+    const totalItem = await showcaseModel
+      .find({ showcaseType: idShowcaseType["id"] })
+      .countDocuments();
+    const activePage = page;
+    const totalPage = Math.ceil(totalItem / limit);
+    return { totalItem, activePage, totalPage };
+  },
 };
