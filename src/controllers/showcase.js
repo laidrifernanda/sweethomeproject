@@ -23,7 +23,7 @@ module.exports = {
       const project = await showcaseService.find(page, limit, status);
 
       //get total documents  
-      const pageInfo = await showcaseService.getPagination(page, limit);
+      const pageInfo = await showcaseService.getPaginationByProject(page, limit, status);
 
       res.status(200).send({ data: project, ...pageInfo });
     } catch (err) {
@@ -38,7 +38,7 @@ module.exports = {
       const project = await showcaseService.find(page, limit, status);
 
       //get total documents  
-      const pageInfo = await showcaseService.getPagination(page, limit);
+      const pageInfo = await showcaseService.getPaginationByProject(page, limit, status);
 
       res.status(200).send({ data: project, ...pageInfo });
     } catch (err) {
