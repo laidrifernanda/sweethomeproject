@@ -8,7 +8,7 @@ module.exports = {
   },
   upload: async (newPayment, projectId) => {
     const paymentData = new paymentModel(newPayment)
-    const projectData = await projectModel.findByIdAndUpdate({_id: projectId}, {status: "On Going"})
+    await projectModel.findByIdAndUpdate({_id: projectId}, {status: "On Going"})
     await paymentData.save()
     return paymentData
   },
