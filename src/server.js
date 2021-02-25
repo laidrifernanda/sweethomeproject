@@ -42,7 +42,8 @@ const { authRouter,
   locationRouter,
   serviceTypeRouter,
   timeslotRouter,
-  userShowCaseRouter
+  userShowCaseRouter,
+  paymentRouter
 } = require("./routes");
 
 //Import data
@@ -100,6 +101,7 @@ app.use(PATH_USER, locationRouter);
 app.use(PATH_USER, serviceTypeRouter);
 app.use(PATH_USER, timeslotRouter);
 app.use(PATH_USER, userShowCaseRouter);
+app.use(PATH_USER, paymentRouter);
 
 //Module Exports
 module.exports = app;
