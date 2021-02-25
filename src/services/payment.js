@@ -1,20 +1,15 @@
 //Import data
-const { paymentModel } = require("../model");
+const { paymentModel, projectModel } = require("../model");
 
 //Module exports
 module.exports = {
-  findId: async (id) => {
-    return await paymentModel.findById(id);
+  find: async (paymentId) => {
+    return await paymentModel.findById({_id: paymentId});
   },
-  add: async (newPayment) => {
-    const paymentData = new paymentModel(newPayment);
-    await paymentData.save();
-    return paymentData;
-  },
-  upload: async (paymentId, uploadReceipt) => {
-    return await paymentModel.findByIdAndUpdate(paymentId,
-      { receipt: uploadReceipt },
-      { new: true }
-    );
+  upload: async (newPayment, projectId) => {
+    const paymentData = new paymentModel(newPayment)
+    const projectData = await projectModel.findByIdAndUpdate({_id: projectId}, {status: "On Going"})
+    await paymentData.save()
+    return paymentData
   },
 };
