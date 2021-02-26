@@ -20,6 +20,7 @@ router.post(
 router.get(
   "/:paymentId/payment",
   authMiddleware.validateToken,
+  paymentMiddleware.validateBody,
   paymentController.find
 )
 //test commit
