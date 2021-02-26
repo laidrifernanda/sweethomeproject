@@ -19,8 +19,8 @@ module.exports = {
   },
   read: async (req, res) => {
     try {
-      const { id } = req.params;
-      const user = await projectService.findId(id);
+      const { projectId } = req.params;
+      const user = await projectService.findId(projectId);
 
       res.status(200).send({ data: user });
     } catch (err) {
