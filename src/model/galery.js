@@ -1,6 +1,7 @@
 //Import dependencies
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const { consistentModel } = require('mongoose-references-integrity-checker');
 
 //Table
 const galerySchema = new Schema(
@@ -17,7 +18,9 @@ const galerySchema = new Schema(
     },
     showcase:{
       type: Schema.Types.ObjectId,
-      ref: 'showcase'
+      ref: 'showcase',
+      required: true,
+      cascade: true,
     },
     createdAt: {
       type: Date,
@@ -34,4 +37,4 @@ const galerySchema = new Schema(
 );
 
 //Export modules
-module.exports = mongoose.model("galery", galerySchema);
+module.exports = consistentModel("galery", galerySchema);

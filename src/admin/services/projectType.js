@@ -21,7 +21,9 @@ module.exports = {
     return await projectTypeModel.findByIdAndUpdate(id, projectTypeData, { new: true, runValidators: true });
   },
   delete: async (id) => {
-    return await projectTypeModel.findByIdAndDelete(id);
+    const projectType = await projectTypeModel.findById(id)
+    await projectTypeModel.deleteOne({ _id: id });
+    return projectType;
   },
   getPagination: async (page, limit) => {
     const totalItem = await projectTypeModel.countDocuments();

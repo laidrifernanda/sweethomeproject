@@ -21,7 +21,9 @@ module.exports = {
     return await locationModel.findByIdAndUpdate(id, locationData, { new: true, runValidators: true });
   },
   delete: async (id) => {
-    return await locationModel.findByIdAndDelete(id);
+    const location = await locationModel.findById(id)
+    await locationModel.deleteOne({ _id: id });
+    return location;
   },
   getPagination: async (page, limit) => {
     const totalItem = await locationModel.countDocuments();

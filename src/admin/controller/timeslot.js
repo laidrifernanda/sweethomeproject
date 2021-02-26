@@ -56,7 +56,10 @@ module.exports = {
         .status(200)
         .send({ message: "Delete Timeslot Success", data: deleteTimeslot });
     } catch (err) {
-      res.status(400).json({ error: err.message });
+      if (err instanceof RefConstraintError === true) {
+        res.status(400).json({message: "Cannot delete"})
+      }
+      res.status(400).json({ error: err.message});
     }
   },
 };

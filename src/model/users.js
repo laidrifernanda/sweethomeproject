@@ -1,6 +1,8 @@
 //Import dependencies
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const { consistentModel } = require('mongoose-references-integrity-checker');
+
 
 //Table
 const userSchema = new Schema(
@@ -73,4 +75,4 @@ const userSchema = new Schema(
 );
 
 //Export modules
-module.exports = mongoose.model("users", userSchema);
+module.exports = consistentModel("users", userSchema);
