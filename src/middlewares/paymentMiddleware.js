@@ -4,8 +4,8 @@ module.exports = {
   validateBody: (req, res, next) => {
     const { body } = req;
     const schema = joi.object({
+      receipt: joi.string().required(),
       note: joi.string().required(),
-      project: joi.required(),
     });
     const validation = schema.validate(body);
 

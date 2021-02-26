@@ -11,17 +11,17 @@ const paymentMiddleware = require("../middlewares/paymentMiddleware");
 
 //Routes
 router.post(
-  "/:projectId/uploadreceipt",
+  "/project/:projectId/payment/uploadreceipt",
   authMiddleware.validateToken,
-  uploadReceiptMiddleware.single('receipt'),
+  uploadReceiptMiddleware.single("receipt"),
   paymentController.upload
 );
-
-router.get(
-  "/:paymentId/payment",
+router.post(
+  "/project/:projectId/payment",
   authMiddleware.validateToken,
   paymentMiddleware.validateBody,
-  paymentController.find
-)
+  paymentController.payment
+);
+
 //test commit
 module.exports = router;
