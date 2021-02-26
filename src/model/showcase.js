@@ -1,9 +1,7 @@
 //Import dependencies
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
-//Import model
-// const {favoriteModel: favorite , galeryModel: gallery} = require("../model")
+const { consistentModel } = require('mongoose-references-integrity-checker');
 
 //Table
 const showcaseSchema = new Schema(
@@ -26,6 +24,8 @@ const showcaseSchema = new Schema(
     project: {
       type: Schema.Types.ObjectId,
       ref: "project",
+      required: true,
+      cascade: true,
     },
     projectTypes: [
       {
@@ -74,10 +74,5 @@ const showcaseSchema = new Schema(
   }
 );
 
-// showcaseSchema.post("delete", (project) => {
-//   favorite.deleteMany({ _id: {$in: project.favorites} });
-//   galery.deleteMany({ _id: {$in: project.gallery}  });
-// });
-
 //Export modules
-module.exports = mongoose.model("showcase", showcaseSchema);
+module.exports = consistentModel("showcase", showcaseSchema);

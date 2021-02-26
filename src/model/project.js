@@ -2,9 +2,8 @@
 const mongoose = require("mongoose");
 const betterId = require("mongoose-better-id");
 const Schema = mongoose.Schema;
+const { consistentModel } = require('mongoose-references-integrity-checker');
 
-//Import model
-// const {paymentModel: payment, cancelModel: cancel, packageModel: package} = require("../model")
 
 //Table
 const projectSchema = new Schema(
@@ -40,10 +39,14 @@ const projectSchema = new Schema(
     user: {
       type: Schema.Types.ObjectId,
       ref: "users",
+      required: true,
+      cascade: true,
     },
     appointment: {
       type: Schema.Types.ObjectId,
       ref: "appointment",
+      required: true,
+      cascade: true,
     },
     packages: [
       {
@@ -87,11 +90,5 @@ projectSchema.plugin(betterId, {
   },
 });
 
-// projectSchema.post("delete", (project) => {
-//   payment.delete({ _id: project.payment });
-//   cancel.delete({ _id: project.cancelPayment  });
-//   package.deleteMany({ _id: { $in: project.packages } });
-// });
-
 //Export modules
-module.exports = mongoose.model("project", projectSchema);
+module.exports = consistentModel("project", projectSchema);

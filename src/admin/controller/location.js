@@ -1,5 +1,6 @@
 //Import data
 const locationService = require("../services/location");
+const { RefConstraintError } = require("mongoose-references-integrity-checker");
 
 //Module exports
 module.exports = {
@@ -64,7 +65,10 @@ module.exports = {
         .status(200)
         .send({ message: "Delete location Success", data: deleteLocation });
     } catch (err) {
-      res.status(400).json({ error: err.message });
+      if (err instanceof RefConstraintError === true) {
+        res.status(400).json({message: "Cannot delete"})
+      }
+      res.status(400).json({ error: err.message});
     }
   },
 };

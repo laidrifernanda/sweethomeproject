@@ -1,6 +1,7 @@
 //Import dependencies
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const { consistentModel } = require('mongoose-references-integrity-checker');
 
 //Table
 const serviceTypeSchema = new Schema(
@@ -31,9 +32,5 @@ const serviceTypeSchema = new Schema(
   }
 );
 
-// serviceTypeSchema.post("delete", (project) => {
-//   timeslot.deleteMany({ _id: {$in: project.timeslots} });
-// });
-
 //Export modules
-module.exports = mongoose.model("serviceType", serviceTypeSchema);
+module.exports = consistentModel("serviceType", serviceTypeSchema);

@@ -2,6 +2,7 @@
 const betterId = require('mongoose-better-id')
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const { consistentModel } = require('mongoose-references-integrity-checker');
 
 //Table
 const appointmentSchema = new Schema(
@@ -45,30 +46,39 @@ const appointmentSchema = new Schema(
     buildType: {
       type: Schema.Types.ObjectId,
       ref: "buildType",
+      required: true,
     },
     serviceType: {
       type: Schema.Types.ObjectId,
       ref: "serviceType",
+      required: true
     },
     locations: [
       {
         type: Schema.Types.ObjectId,
         ref: "location",
+        required: true
+
       },
     ],
     styles: [
       {
         type: Schema.Types.ObjectId,
         ref: "styles",
+        required: true
+
       },
     ],
     user: {
       type: Schema.Types.ObjectId,
       ref: "users",
+      required: true,
+      cascade: true
     },
     timeslot: {
       type: Schema.Types.ObjectId,
       ref: "timeslot",
+      required: true
     },
     createdAt: {
       type: Date,
@@ -99,4 +109,4 @@ appointmentSchema.plugin(betterId, {
 });
 
 //Export modules
-module.exports = mongoose.model("appointment", appointmentSchema);
+module.exports = consistentModel("appointment", appointmentSchema);

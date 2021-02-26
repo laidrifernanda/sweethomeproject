@@ -1,6 +1,8 @@
 //Import dependencies
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const { consistentModel } = require('mongoose-references-integrity-checker');
+
 
 //Table
 const timeslotSchema = new Schema(
@@ -38,4 +40,4 @@ const timeslotSchema = new Schema(
 );
 
 //Export modules
-module.exports = mongoose.model("timeslot", timeslotSchema);
+module.exports = consistentModel("timeslot", timeslotSchema);

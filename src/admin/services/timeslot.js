@@ -25,7 +25,9 @@ module.exports = {
     return timeslotModel.findByIdAndUpdate(id, timeslotData, { new: true , runValidators: true});
   },
   delete: async (id) => {
-    return timeslotModel.findByIdAndRemove(id);
+    const timeslot = await timeslotModel.findById(id)
+    await timeslotModel.deleteOne({ _id: id });
+    return timeslot;
   },
   getPagination: async (page, limit) => {
     const totalItem = await timeslotModel.countDocuments();

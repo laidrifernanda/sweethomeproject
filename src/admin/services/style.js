@@ -21,7 +21,9 @@ module.exports = {
     return await stylesModel.findByIdAndUpdate(id, styleData, { new: true, runValidators: true });
   },
   delete: async (id) => {
-    return await stylesModel.findByIdAndDelete(id);
+    const style = await stylesModel.findById(id)
+    await stylesModel.deleteOne({ _id: id });
+    return style;
   },
   getPagination: async (page, limit) => {
     const totalItem = await stylesModel.countDocuments();

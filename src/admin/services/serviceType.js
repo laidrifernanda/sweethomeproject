@@ -24,7 +24,9 @@ module.exports = {
     });
   },
   delete: async (id) => {
-    return await serviceTypeModel.findByIdAndDelete(id);
+    const serviceType = await serviceTypeModel.findById(id)
+    await serviceTypeModel.deleteOne({ _id: id });
+    return serviceType;
   },
   getPagination: async (page, limit) => {
     const totalItem = await serviceTypeModel.countDocuments();
