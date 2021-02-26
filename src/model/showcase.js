@@ -24,7 +24,6 @@ const showcaseSchema = new Schema(
     project: {
       type: Schema.Types.ObjectId,
       ref: "project",
-      required: true,
       cascade: true,
     },
     projectTypes: [

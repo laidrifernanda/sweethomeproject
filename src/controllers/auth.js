@@ -62,8 +62,10 @@ module.exports = {
         const payload = {
           _id: isUser.id,
         };
-        token = jwt.sign(payload, SALT_KEY, { expiresIn: "1800s" });
-
+        token = jwt.sign(payload, SALT_KEY);
+        // {
+        //   expiresIn: "1800s";
+        // }
         isUser.activity = new Date()
         res.status(200).send({ info: "LOGIN", data: { token, role: "USER" } });
       }
