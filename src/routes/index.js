@@ -9,7 +9,7 @@ const locationRouter = require("./location");
 const serviceTypeRouter = require("./serviceType");
 const timeslotRouter = require("./timeslot");
 const userShowCaseRouter = require("./showcase");
-
+const paymentRouter = require("./payment")
 
 
 //Module exports
@@ -23,5 +23,6 @@ module.exports = {
   locationRouter,
   serviceTypeRouter,
   timeslotRouter,
-  userShowCaseRouter
+  userShowCaseRouter,
+  paymentRouter
 };
