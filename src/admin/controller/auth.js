@@ -25,7 +25,7 @@ module.exports = {
       const payload = {
         _id: isEmailValid.id,
       };
-      const token = jwt.sign(payload, SECRET_KEY_TOKEN, { expiresIn: "1800s" });
+      const token = jwt.sign(payload, SECRET_KEY_TOKEN);
 
       res.status(200).send({ info: "WELCOME ADMIN", data: { token } });
     } catch (err) {
@@ -65,7 +65,7 @@ module.exports = {
   },
   browse: async (req, res) => {
     // destructure page and limit and set default values
-    const { page = 1 , limit = 10} = req.query;
+    const { page = 1, limit = 10 } = req.query;
     try {
       const adminInfo = await adminService.browse(page, limit);
 
