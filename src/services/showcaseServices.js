@@ -108,6 +108,49 @@ module.exports = {
       .skip((page - 1) * limit)
       .exec();
   },
+  findId: async (showcaseId) => {
+    return await showcaseModel
+      .findById(showcaseId)
+      .populate({ path: "styles" })
+      .populate({ path: "projectTypes" })
+      .populate({ path: "gallery" })
+      .populate({ path: "favorites" })
+      .populate({
+        path: "project",
+        populate: [
+          {
+            path: "packages",
+            select: ["duration", "area", "price", "location", "projectType"],
+            populate: [
+              { path: "location", select: ["name"] },
+              { path: "projectType", select: ["name"] },
+            ],
+          },
+          {
+            path: "appointment",
+            select: [
+              "buildType",
+              "budget",
+              "serviceType",
+              "duration",
+              "address",
+              "ticket",
+              "user",
+            ],
+            populate: [
+              { path: "buildType", select: ["name"] },
+              { path: "serviceType", select: ["name"] },
+              {
+                path: "user",
+                select: ["address", "firstname", "lastname", "email"],
+              },
+            ],
+          },
+        ],
+      })
+      .populate({ path: "admin", select: ["name"] })
+      .populate({ path: "showcaseType" });
+  },
   getPagination: async (page, limit) => {
     const totalItem = await showcaseModel.countDocuments();
     const activePage = page;
