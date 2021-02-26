@@ -26,9 +26,9 @@ module.exports = {
       ])
       .exec();
   },
-  findId: async (id) => {
+  findId: async (projectId) => {
     return await projectModel
-      .findById(id)
+      .findById(projectId)
       .populate({ path: "packages" })
       .populate({ path: "user", select: ["-appointments"] });
   },
