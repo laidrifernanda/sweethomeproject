@@ -90,6 +90,7 @@ module.exports = {
           count: { $sum: 1 },
         },
       },
+      {$sort: {_id: 1}}
     ]);
 
     const thisYearProject = await projectModel.aggregate([
