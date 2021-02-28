@@ -1,11 +1,11 @@
 //Import data
-const { appointmentModel , projectModel} = require("../../model");
+const { appointmentModel, projectModel } = require("../../model");
 const moment = require("moment");
 
 //Module exports
 module.exports = {
   data: async (defaultDate) => {
-    let date = moment(defaultDate).startOf("day")
+    let date = moment(defaultDate).startOf("day");
     const today = await appointmentModel
       .find({
         date: {
@@ -28,7 +28,7 @@ module.exports = {
         "-buildType",
         "-ticket",
       ]);
-    
+
     const tommorow = await appointmentModel
       .find({
         date: {
@@ -51,8 +51,7 @@ module.exports = {
         "-buildType",
         "-ticket",
       ]);
-    
-    
+
     const theDayAfterTommorow = await appointmentModel
       .find({
         date: {
@@ -75,51 +74,47 @@ module.exports = {
         "-buildType",
         "-ticket",
       ]);
-    
-    const thisYearAppointment = await appointmentModel
-      .find({
-        date: {
-          $gte: moment(date).startOf("year").toDate(),
-          $lte: moment(date).endOf("year").toDate(),
+
+    const thisYearAppointment = await appointmentModel.aggregate([
+      {
+        $match: {
+          date: {
+            $gte: moment(date).startOf("year").toDate(),
+            $lte: moment(date).endOf("year").toDate(),
+          },
         },
-      })
-      .populate({ path: "user", select: ["firstname", "lastname"] })
-      .populate({ path: "serviceType", select: ["name"] })
-      .populate({ path: "locations", select: ["name"] })
-      .populate({ path: "timeslot", select: ["start", "end"] })
-      .select([
-        "-duration",
-        "-area",
-        "-budget",
-        "-address",
-        "-note",
-        "-styles",
-        "-buildType",
-        "-ticket",
-      ]);
-    
-    const thisYearProject = await projectModel
-      .find({
-        createdAt: {
-          $gte: moment(date).startOf("year").toDate(),
-          $lte: moment(date).endOf("year").toDate(),
+      },
+      {
+        $group: {
+          _id: { $month: { $toDate: "$date" } },
+          count: { $sum: 1 },
         },
-      })
-      .populate({ path: "user", select: ["firstname", "lastname"] })
-      .populate({ path: "serviceType", select: ["name"] })
-      .populate({ path: "locations", select: ["name"] })
-      .populate({ path: "timeslot", select: ["start", "end"] })
-      .select([
-        "-appointment",
-        "-packages",
-        "-receipt",
-        "-styles",
-        "-buildType",
-        "-ticket",
-      ]);
-    
-    
-    
-    return {today, tommorow, theDayAfterTommorow, thisYearAppointment, thisYearProject}
+      },
+    ]);
+
+    const thisYearProject = await projectModel.aggregate([
+      {
+        $match: {
+          createdAt: {
+            $gte: moment(date).startOf("year").toDate(),
+            $lte: moment(date).endOf("year").toDate(),
+          },
+        },
+      },
+      {
+        $group: {
+          _id: { $month: { $toDate: "$createdAt" } },
+          count: { $sum: 1 },
+        },
+      },
+    ]);
+
+    return {
+      today,
+      tommorow,
+      theDayAfterTommorow,
+      thisYearAppointment,
+      thisYearProject,
+    };
   },
 };
