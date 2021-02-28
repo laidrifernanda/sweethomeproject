@@ -151,6 +151,22 @@ module.exports = {
       .populate({ path: "admin", select: ["name"] })
       .populate({ path: "showcaseType" });
   },
+  search: async (query) => {
+    return await showcaseModel.aggregate([
+      {
+        $search: {
+          autocomplete: {
+            query: query,
+            path: "name",
+            fuzzy: {
+              maxEdits: 2,
+              prefixLength: 3,
+            },
+          },
+        },
+      },
+    ]);
+  },
   getPagination: async (page, limit) => {
     const totalItem = await showcaseModel.countDocuments();
     const activePage = page;

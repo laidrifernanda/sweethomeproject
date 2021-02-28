@@ -1,4 +1,4 @@
-const showcaseService = require("../services/showcaseServices")
+const showcaseService = require("../services/showcaseServices");
 //module exports
 module.exports = {
   browse: async (req, res) => {
@@ -59,6 +59,16 @@ module.exports = {
       );
 
       res.status(200).send({ data: project, ...pageInfo });
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  },
+  search: async (req, res) => {
+    const { query } = req.query;
+    try {
+      const searchData = await showcaseService.search(query);
+
+      res.status(200).send({ data: searchData });
     } catch (err) {
       res.status(400).json({ error: err.message });
     }
