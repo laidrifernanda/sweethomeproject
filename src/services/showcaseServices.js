@@ -165,6 +165,35 @@ module.exports = {
           },
         },
       },
+      {
+        $project: {
+          _id: 1,
+          name: 1,
+          gallery: 1,
+          address: 1,
+          showcaseType: 1,
+          favorites: 1,
+          show: 1,
+          createdAt: 1,
+          updatedAt: 1,
+        },
+      },
+      {
+        $lookup: {
+          from: "galery",
+          localField: "gallery",
+          foreignField: "_id",
+          as: "gallery",
+        },
+      },
+      {
+        $lookup: {
+          from: "showcaseType",
+          localField: "showcaseType",
+          foreignField: "_id",
+          as: "showcaseType",
+        },
+      },
     ]);
   },
   getPagination: async (page, limit) => {
