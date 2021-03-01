@@ -50,6 +50,18 @@ const userSchema = new Schema(
       minlength: 3,
       maxlength: 255,
     },
+    statusUpdate: {
+      type: Boolean,
+      default: true,
+    },
+    event: {
+      type: Boolean,
+      default: true,
+    },
+    newsletter: {
+      type: Boolean,
+      default: true,
+    },
     appointments: [
       {
         type: Schema.Types.ObjectId,
