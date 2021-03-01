@@ -1,4 +1,6 @@
+//Import data
 const showcaseService = require("../services/showcaseServices");
+
 //module exports
 module.exports = {
   browse: async (req, res) => {
@@ -69,6 +71,19 @@ module.exports = {
       const searchData = await showcaseService.search(query);
 
       res.status(200).send({ data: searchData });
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  },
+  love: async (req, res) => {
+    const { user } = req;
+    const { showcaseId } = req.params
+
+    try {
+      const favoriteData = await showcaseService.love(showcaseId, {
+        _id: user._id,
+      });
+      res.status(200).send({ data: favoriteData });
     } catch (err) {
       res.status(400).json({ error: err.message });
     }
