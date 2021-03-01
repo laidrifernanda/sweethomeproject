@@ -17,6 +17,18 @@ module.exports = {
       res.status(400).json({ error: err.message });
     }
   },
+  search: async (req, res) => {
+    // destructure page and limit and set default values
+    const { query } = req.query;
+    try {
+      //get total documents
+      const searchData = await showcaseService.search(query);
+
+      res.status(200).send({ data: searchData });
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  },
   read: async (req, res) => {
     try {
       const { id } = req.params;

@@ -14,6 +14,11 @@ router.get(
   authMiddleware.validateToken,
   showcaseController.browse
 );
+router.get(
+  "/showcase/search",
+  authMiddleware.validateToken,
+  showcaseController.search
+);
 // router.get("/showcaseType/:id", showcaseController.read);
 router.post("/showcase", authMiddleware.validateToken, showcaseController.add);
 
