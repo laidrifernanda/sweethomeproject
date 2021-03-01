@@ -7,10 +7,11 @@ before_script:
 
 stage: 
   - develop
+  - main
 
-develop:
+main:
   type: deploy
-  stage: develop 
+  stage: main
   image: ruby:latest
   script:
     - dpl --provider=heroku --app=$HEROKU_APP_DEVELOP --api-key=$HEROKU_API_KEY
