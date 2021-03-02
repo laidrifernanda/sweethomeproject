@@ -122,28 +122,6 @@ module.exports = {
       res.status(400).json({ error: err.message });
     }
   },
-  locationPortofolio: async (req, res) => {
-    // destructure page and limit and set default values
-    const { page = 1, limit = 10 } = req.query;
-    const {query} = req
-    const location = {...query}
-    const locationId = await filter.locations(location)
-    console.log(locationId, "ini location dari filter")
-    const status = "Portofolio"
-    try {
-      const project = await showcaseService.findLocation(page, limit, status, locationId);
-       //get total documents
-       const pageInfo = await showcaseService.getPagination(page, limit);
-       const message = "what you filter was not found"
-      if(project.length === 0){
-        res.status(200).send({data:project,message: message, ...pageInfo})
-      } else {
-        res.status(200).send({ data: project, ...pageInfo });
-      }
-    } catch (err) {
-      res.status(400).json({ error: err.message });
-    }
-  },
   styleProject: async (req, res) => {
     // destructure page and limit and set default values
     const { page = 1, limit = 10 } = req.query;
