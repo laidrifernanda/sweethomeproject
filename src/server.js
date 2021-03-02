@@ -33,7 +33,8 @@ const {
 } = require("./admin/routes");
 
 //User Routes
-const { authRouter,
+const {
+  authRouter,
   userAuthRouter,
   appointmentRouter,
   profileRouter,
@@ -44,7 +45,8 @@ const { authRouter,
   timeslotRouter,
   userShowCaseRouter,
   paymentRouter,
-  projectRouter
+  projectRouter,
+  cancelRouter,
 } = require("./routes");
 
 //Import data
@@ -89,8 +91,6 @@ app.use(PATH_ADMIN, projectRoutes);
 app.use(PATH_ADMIN, showcaseRoutes);
 app.use(PATH_ADMIN, dashboardRoutes);
 
-
-
 //User
 
 app.use(PATH_USER, authRouter);
@@ -105,6 +105,7 @@ app.use(PATH_USER, timeslotRouter);
 app.use(PATH_USER, userShowCaseRouter);
 app.use(PATH_USER, paymentRouter);
 app.use(PATH_USER, projectRouter);
+app.use(PATH_USER, cancelRouter);
 
 //Module Exports
 module.exports = app;

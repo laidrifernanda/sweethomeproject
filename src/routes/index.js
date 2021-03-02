@@ -1,8 +1,8 @@
 //Import Routes
 const authRouter = require("./auth");
-const userAuthRouter = require("./userAuth")
-const appointmentRouter = require('./appointment')
-const profileRouter = require("./profile")
+const userAuthRouter = require("./userAuth");
+const appointmentRouter = require("./appointment");
+const profileRouter = require("./profile");
 const styleRouter = require("./styles");
 const buildTypeRouter = require("./buildType");
 const locationRouter = require("./location");
@@ -10,8 +10,8 @@ const serviceTypeRouter = require("./serviceType");
 const timeslotRouter = require("./timeslot");
 const userShowCaseRouter = require("./showcase");
 const paymentRouter = require("./payment");
-const projectRouter = require("./project")
-
+const projectRouter = require("./project");
+const cancelRouter = require("./cancel");
 
 //Module exports
 module.exports = {
@@ -27,4 +27,5 @@ module.exports = {
   userShowCaseRouter,
   paymentRouter,
   projectRouter,
+  cancelRouter,
 };

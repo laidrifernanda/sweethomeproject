@@ -32,7 +32,7 @@
   "dev": {},
   "scripts": {
     "test": "DEBUG=true nyc mocha tests/*.js --exit --inspect=0.0.0.0:9229 --timeout 120000",
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "clean-code": "eslint app index.* --ext .js --cache --color",
     "pretest": "./node_modules/.bin/eslint --ignore-path .gitignore . --fix"
   },
