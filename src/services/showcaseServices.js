@@ -1,4 +1,4 @@
-const { showcaseModel, showcaseTypeModel, locationModel, stylesModel} = require("../model");
+const { showcaseModel, showcaseTypeModel , favoriteModel} = require("../model");
 
 module.exports = {
   findAll: async (page, limit) => {
@@ -307,6 +307,13 @@ module.exports = {
       .limit(limit)
       .skip((page - 1) * limit)
       .exec();
+  },
+  love: async (showcaseId, user) => {
+    const favorite = new favoriteModel({
+      showcase: showcaseId,
+      user: user
+    })
+    return await favorite.save()
   },
   getPagination: async (page, limit) => {
     const totalItem = await showcaseModel.countDocuments();

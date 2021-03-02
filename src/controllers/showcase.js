@@ -1,5 +1,7 @@
+//Import data
 const showcaseService = require("../services/showcaseServices");
 const filter = require("../helper/filter")
+
 //module exports
 module.exports = {
   browse: async (req, res) => {
@@ -104,7 +106,7 @@ module.exports = {
     const {query} = req
     const location = {...query}
     const locationId = await filter.locations(location)
-    console.log(locationId, "ini location dari filter")
+    // console.log(locationId, "ini location dari filter")
     const status = "Portofolio"
     try {
       const project = await showcaseService.findLocation(page, limit, status, locationId);
@@ -128,7 +130,7 @@ module.exports = {
     const {query} = req
     const style = {...query}
     const styleId = await filter.styles(style)
-    console.log(styleId, "ini style dari filter")
+    // console.log(styleId, "ini style dari filter")
     const status = "Completed project"
     try {
       const project = await showcaseService.findStyle(page, limit, status, styleId);
@@ -152,7 +154,7 @@ module.exports = {
     const {query} = req
     const style = {...query}
     const styleId = await filter.styles(style)
-    console.log(styleId, "ini style dari filter")
+    // console.log(styleId, "ini style dari filter")
     const status = "Portofolio"
     try {
       const project = await showcaseService.findStyle(page, limit, status, styleId);
@@ -170,4 +172,17 @@ module.exports = {
       res.status(400).json({ error: err.message });
     }
   },
+  love: async (req, res) => {
+    const { user } = req;
+    const { showcaseId } = req.params
+
+    try {
+      const favoriteData = await showcaseService.love(showcaseId, {
+        _id: user._id,
+      });
+      res.status(200).send({ data: favoriteData });
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  }
 };

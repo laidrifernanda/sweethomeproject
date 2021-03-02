@@ -13,4 +13,5 @@ router.get("/showcase/portofolio/location",showcaseController.locationProfile)
 router.get("/showcase/project/style", showcaseController.styleProject)
 router.get("/showcase/portofolio/style", showcaseController.stylePortofolio)
 
+router.post("/showcase/:showcaseId/favorite", showcaseController.love)
 module.exports = router;
