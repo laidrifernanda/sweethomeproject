@@ -5,7 +5,7 @@ const { projectModel } = require("../model");
 module.exports = {
   find: async (userId, page, limit) => {
     return await projectModel
-      .findById(userId)
+      .find({ user: userId })
       .populate({
         path: "packages",
         populate: [
@@ -32,8 +32,10 @@ module.exports = {
       .populate({ path: "packages" })
       .populate({ path: "user", select: ["-appointments"] });
   },
-  getPagination: async (page, limit) => {
-    const totalItem = await projectModel.countDocuments();
+  getPagination: async (userId, page, limit) => {
+    const totalItem = await projectModel
+      .find({ user: userId })
+      .countDocuments();
     const activePage = page;
     const totalPage = Math.ceil(totalItem / limit);
 
