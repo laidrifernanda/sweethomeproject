@@ -15,6 +15,12 @@ router.get(
   appointmentController.browse
 );
 
+router.get(
+  "/appointment/:id",
+  authMiddleware.validateToken,
+  appointmentController.read
+);
+
 router.post("/appointment",
 authMiddleware.validateToken,
 appointmentMiddleware.validateBody,
