@@ -7,10 +7,10 @@ module.exports = {
     // destructure page and limit and set default values
     const { page = 1, limit=10 } = req.query;
     try {
-      const showcaseType = await showcaseTypeService.find(page, limit);
+      const showcaseType = await showcaseTypeService.find(+page, +limit);
 
       //get total documents
-      const pageInfo = await showcaseTypeService.getPagination(page, limit);
+      const pageInfo = await showcaseTypeService.getPagination(+page, +limit);
 
       res.status(200).send({ data: showcaseType, ...pageInfo });
     } catch (err) {

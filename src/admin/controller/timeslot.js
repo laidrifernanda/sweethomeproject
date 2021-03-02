@@ -8,10 +8,10 @@ module.exports = {
     // destructure page and limit and set default values
     const { page = 1, limit= 10 } = req.query;
     try {
-      const timeslot = await timeslotService.find(serviceTypeId, page, limit);
+      const timeslot = await timeslotService.find(serviceTypeId, +page, +limit);
 
       //get total documents
-      const pageInfo = await timeslotService.getPagination(page, limit);
+      const pageInfo = await timeslotService.getPagination(+page, +limit);
 
       res.status(200).send({ data: timeslot, ...pageInfo });
     } catch (err) {
