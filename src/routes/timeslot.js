@@ -10,7 +10,6 @@ const authMiddleware = require("../middlewares/auth");
 //Routes
 router.get(
   "/serviceType/:serviceTypeId/timeslot",
-  authMiddleware.validateToken,
   timeslotController.browse
 );
 

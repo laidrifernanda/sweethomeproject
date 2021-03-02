@@ -10,7 +10,6 @@ const authMiddleware = require("../middlewares/auth");
 //Routes
 router.get(
   "/location",
-  authMiddleware.validateToken,
   locationController.browse
 );
 
