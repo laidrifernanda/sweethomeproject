@@ -5,13 +5,11 @@ router.get("/showcase", showcaseController.browse);
 router.get("/showcase/search", showcaseController.search);
 router.get("/showcase/project", showcaseController.project);
 router.get("/showcase/portofolio", showcaseController.profile);
+router.get("/showcase/project/location", showcaseController.locationProject);
+router.get("/showcase/portofolio/location", showcaseController.locationProfile);
+router.get("/showcase/project/style", showcaseController.styleProject);
+router.get("/showcase/portofolio/style", showcaseController.stylePortofolio);
 router.get("/showcase/:showcaseId", showcaseController.read);
 
-router.get("/showcase/project/location",showcaseController.locationProject)
-router.get("/showcase/portofolio/location",showcaseController.locationProfile)
-
-router.get("/showcase/project/style", showcaseController.styleProject)
-router.get("/showcase/portofolio/style", showcaseController.stylePortofolio)
-
-router.post("/showcase/:showcaseId/favorite", showcaseController.love)
+router.post("/showcase/:showcaseId/favorite", showcaseController.love);
 module.exports = router;
