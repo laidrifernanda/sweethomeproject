@@ -309,10 +309,12 @@ module.exports = {
       .exec();
   },
   love: async (showcaseId, user) => {
+    const showcase = showcaseModel.findById(showcaseId)
     const favorite = new favoriteModel({
       showcase: showcaseId,
       user: user
     })
+    showcase.favorites.push(favorite)
     return await favorite.save()
   },
   getPagination: async (page, limit) => {
