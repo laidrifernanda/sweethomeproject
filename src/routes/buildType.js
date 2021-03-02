@@ -10,7 +10,6 @@ const authMiddleware = require("../middlewares/auth");
 //Routes
 router.get(
   "/buildType",
-  authMiddleware.validateToken,
   buildTypeController.browse
 );
 
