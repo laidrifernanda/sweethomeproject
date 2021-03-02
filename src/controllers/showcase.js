@@ -1,6 +1,7 @@
 //Import data
 const showcaseService = require("../services/showcaseServices");
-const filter = require("../helper/filter")
+const filter = require("../helper/filter");
+const { RefConstraintError } = require("mongoose-references-integrity-checker");
 
 //module exports
 module.exports = {
@@ -79,20 +80,25 @@ module.exports = {
   locationProject: async (req, res) => {
     // destructure page and limit and set default values
     const { page = 1, limit = 10 } = req.query;
-    const {query} = req
-    const location = {...query}
-    const locationId = await filter.locations(location)
-    console.log(locationId, "ini location dari filter")
-    const status = "Completed project"
+    const { query } = req;
+    const location = { ...query };
+    const locationId = await filter.locations(location);
+    console.log(locationId, "ini location dari filter");
+    const status = "Completed project";
     try {
-      const project = await showcaseService.findLocation(+page, +limit, status, locationId);
+      const project = await showcaseService.findLocation(
+        +page,
+        +limit,
+        status,
+        locationId
+      );
 
       //get total documents
       const pageInfo = await showcaseService.getPagination(+page, +limit);
-      const message = "what you filter was not found"
+      const message = "what you filter was not found";
 
-      if(project.length === 0){
-        res.status(200).send({data:project,message: message, ...pageInfo})
+      if (project.length === 0) {
+        res.status(200).send({ data: project, message: message, ...pageInfo });
       } else {
         res.status(200).send({ data: project, ...pageInfo });
       }
@@ -103,20 +109,25 @@ module.exports = {
   locationProfile: async (req, res) => {
     // destructure page and limit and set default values
     const { page = 1, limit = 10 } = req.query;
-    const {query} = req
-    const location = {...query}
-    const locationId = await filter.locations(location)
+    const { query } = req;
+    const location = { ...query };
+    const locationId = await filter.locations(location);
     // console.log(locationId, "ini location dari filter")
-    const status = "Portofolio"
+    const status = "Portofolio";
     try {
-      const project = await showcaseService.findLocation(+page, +limit, status, locationId);
+      const project = await showcaseService.findLocation(
+        +page,
+        +limit,
+        status,
+        locationId
+      );
 
       //get total documents
       const pageInfo = await showcaseService.getPagination(+page, +limit);
-      const message = "what you filter was not found"
+      const message = "what you filter was not found";
 
-      if(project.length === 0){
-        res.status(200).send({data:project,message: message, ...pageInfo})
+      if (project.length === 0) {
+        res.status(200).send({ data: project, message: message, ...pageInfo });
       } else {
         res.status(200).send({ data: project, ...pageInfo });
       }
@@ -127,20 +138,25 @@ module.exports = {
   styleProject: async (req, res) => {
     // destructure page and limit and set default values
     const { page = 1, limit = 10 } = req.query;
-    const {query} = req
-    const style = {...query}
-    const styleId = await filter.styles(style)
+    const { query } = req;
+    const style = { ...query };
+    const styleId = await filter.styles(style);
     // console.log(styleId, "ini style dari filter")
-    const status = "Completed project"
+    const status = "Completed project";
     try {
-      const project = await showcaseService.findStyle(+page, +limit, status, styleId);
+      const project = await showcaseService.findStyle(
+        +page,
+        +limit,
+        status,
+        styleId
+      );
 
       //get total documents
       const pageInfo = await showcaseService.getPagination(+page, +limit);
-      const message = "what you filter was not found"
+      const message = "what you filter was not found";
 
-      if(project.length === 0){
-        res.status(200).send({data:project,message: message, ...pageInfo})
+      if (project.length === 0) {
+        res.status(200).send({ data: project, message: message, ...pageInfo });
       } else {
         res.status(200).send({ data: project, ...pageInfo });
       }
@@ -151,20 +167,25 @@ module.exports = {
   stylePortofolio: async (req, res) => {
     // destructure page and limit and set default values
     const { page = 1, limit = 10 } = req.query;
-    const {query} = req
-    const style = {...query}
-    const styleId = await filter.styles(style)
+    const { query } = req;
+    const style = { ...query };
+    const styleId = await filter.styles(style);
     // console.log(styleId, "ini style dari filter")
-    const status = "Portofolio"
+    const status = "Portofolio";
     try {
-      const project = await showcaseService.findStyle(+page, +limit, status, styleId);
+      const project = await showcaseService.findStyle(
+        +page,
+        +limit,
+        status,
+        styleId
+      );
 
       //get total documents
       const pageInfo = await showcaseService.getPagination(+page, +limit);
-      const message = "what you filter was not found"
+      const message = "what you filter was not found";
 
-      if(project.length === 0){
-        res.status(200).send({data:project,message:message, ...pageInfo})
+      if (project.length === 0) {
+        res.status(200).send({ data: project, message: message, ...pageInfo });
       } else {
         res.status(200).send({ data: project, ...pageInfo });
       }
@@ -174,15 +195,33 @@ module.exports = {
   },
   love: async (req, res) => {
     const { user } = req;
-    const { showcaseId } = req.params
+    const { showcaseId } = req.params;
 
+    const matchData = await showcaseService.match(showcaseId, user._id);
+    if (!matchData) {
+      try {
+        const favoriteData = await showcaseService.love(showcaseId, user._id);
+        res.status(200).send({ data: favoriteData });
+      } catch (err) {
+        res.status(400).json({ error: err.message });
+      }
+    } else {
+      res.status(400).send({ error: "Already favorite" });
+    }
+  },
+  deleteLove: async (req, res) => {
     try {
-      const favoriteData = await showcaseService.love(showcaseId, {
-        _id: user._id,
-      });
-      res.status(200).send({ data: favoriteData });
+      const { user } = req;
+      const { showcaseId } = req.params;
+
+      await showcaseService.deleteLove(showcaseId, user._id);
+
+      res.status(200).send({ data: false });
     } catch (err) {
+      if (err instanceof RefConstraintError === true) {
+        res.status(400).json({ message: "Cannot delete" });
+      }
       res.status(400).json({ error: err.message });
     }
-  }
+  },
 };

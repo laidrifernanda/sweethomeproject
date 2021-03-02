@@ -23,4 +23,9 @@ router.post(
   authMiddleware.validateToken,
   showcaseController.love
 );
+router.delete(
+  "/showcase/:showcaseId/favorite",
+  authMiddleware.validateToken,
+  showcaseController.deleteLove
+);
 module.exports = router;
