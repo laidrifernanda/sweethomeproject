@@ -7,10 +7,10 @@ module.exports = {
     const { user } = req;
     const { page = 1, limit = 10 } = req.query;
     try {
-      const appointment = await appointmentService.find(user, page, limit);
+      const appointment = await appointmentService.find(user, +page, +limit);
 
       //get total documents
-      const pageInfo = await appointmentService.getPagination(user, page, limit);
+      const pageInfo = await appointmentService.getPagination(user, +page, +limit);
       res.status(200).send({ data: appointment, ...pageInfo });
     } catch (err) {
       res.status(400).json({ error: err.message });

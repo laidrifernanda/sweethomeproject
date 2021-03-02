@@ -67,10 +67,10 @@ module.exports = {
     // destructure page and limit and set default values
     const { page = 1, limit = 10 } = req.query;
     try {
-      const adminInfo = await adminService.browse(page, limit);
+      const adminInfo = await adminService.browse(+page, +limit);
 
       //get total documents
-      const pageInfo = await adminService.getPagination(page, limit);
+      const pageInfo = await adminService.getPagination(+page, +limit);
 
       res.status(200).send({ data: adminInfo, ...pageInfo });
     } catch (err) {

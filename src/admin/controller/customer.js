@@ -6,10 +6,10 @@ module.exports = {
   browse: async (req, res) => {
     const { page = 1 , limit= 10} = req.query;
     try {
-      const user = await userService.find(page, limit);
+      const user = await userService.find(+page, +limit);
 
       //get total documents
-      const pageInfo = await userService.getPagination(page, limit);
+      const pageInfo = await userService.getPagination(+page, +limit);
       res.status(200).send({ data: user, ...pageInfo });
     } catch (err) {
       res.status(400).json({ error: err.message });

@@ -8,10 +8,10 @@ module.exports = {
     // destructure page and limit and set default values
     const { page = 1 , limit = 10} = req.query;
     try {
-      const location = await locationService.find(page, limit);
+      const location = await locationService.find(+page, +limit);
 
       //get total documents
-      const pageInfo = await locationService.getPagination(page, limit);
+      const pageInfo = await locationService.getPagination(+page, +limit);
 
       res.status(200).send({ data: location, ...pageInfo });
     } catch (err) {

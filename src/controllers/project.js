@@ -8,10 +8,10 @@ module.exports = {
     // destructure page and limit and set default values
     const { page = 1, limit = 10 } = req.query;
     try {
-      const project = await projectService.find(user._id ,page, limit);
+      const project = await projectService.find(user._id ,+page, +limit);
 
       //get total documents
-      const pageInfo = await projectService.getPagination(user._id, page, limit);
+      const pageInfo = await projectService.getPagination(user._id, +page, +limit);
 
       res.status(200).send({ data: project, ...pageInfo });
     } catch (err) {

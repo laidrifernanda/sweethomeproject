@@ -8,10 +8,10 @@ module.exports = {
     // destructure page and limit and set default values
     const { page = 1, limit = 10 } = req.query;
     try {
-      const project = await showcaseService.findAll(page, limit);
+      const project = await showcaseService.findAll(+page, +limit);
 
       //get total documents
-      const pageInfo = await showcaseService.getPagination(page, limit);
+      const pageInfo = await showcaseService.getPagination(+page, +limit);
 
       res.status(200).send({ data: project, ...pageInfo });
     } catch (err) {
@@ -33,12 +33,12 @@ module.exports = {
     const { page = 1, limit = 10 } = req.query;
     const status = "Completed project";
     try {
-      const project = await showcaseService.find(page, limit, status);
+      const project = await showcaseService.find(+page, +limit, status);
 
       //get total documents
       const pageInfo = await showcaseService.getPaginationByProject(
-        page,
-        limit,
+        +page,
+        +limit,
         status
       );
 
@@ -52,12 +52,12 @@ module.exports = {
     const { page = 1, limit = 10 } = req.query;
     const status = "Portofolio";
     try {
-      const project = await showcaseService.find(page, limit, status);
+      const project = await showcaseService.find(+page, +limit, status);
 
       //get total documents
       const pageInfo = await showcaseService.getPaginationByProject(
-        page,
-        limit,
+        +page,
+        +limit,
         status
       );
 
@@ -85,10 +85,10 @@ module.exports = {
     console.log(locationId, "ini location dari filter")
     const status = "Completed project"
     try {
-      const project = await showcaseService.findLocation(page, limit, status, locationId);
+      const project = await showcaseService.findLocation(+page, +limit, status, locationId);
 
       //get total documents
-      const pageInfo = await showcaseService.getPagination(page, limit);
+      const pageInfo = await showcaseService.getPagination(+page, +limit);
       const message = "what you filter was not found"
 
       if(project.length === 0){
@@ -109,10 +109,10 @@ module.exports = {
     // console.log(locationId, "ini location dari filter")
     const status = "Portofolio"
     try {
-      const project = await showcaseService.findLocation(page, limit, status, locationId);
+      const project = await showcaseService.findLocation(+page, +limit, status, locationId);
 
       //get total documents
-      const pageInfo = await showcaseService.getPagination(page, limit);
+      const pageInfo = await showcaseService.getPagination(+page, +limit);
       const message = "what you filter was not found"
 
       if(project.length === 0){
@@ -133,10 +133,10 @@ module.exports = {
     // console.log(styleId, "ini style dari filter")
     const status = "Completed project"
     try {
-      const project = await showcaseService.findStyle(page, limit, status, styleId);
+      const project = await showcaseService.findStyle(+page, +limit, status, styleId);
 
       //get total documents
-      const pageInfo = await showcaseService.getPagination(page, limit);
+      const pageInfo = await showcaseService.getPagination(+page, +limit);
       const message = "what you filter was not found"
 
       if(project.length === 0){
@@ -157,10 +157,10 @@ module.exports = {
     // console.log(styleId, "ini style dari filter")
     const status = "Portofolio"
     try {
-      const project = await showcaseService.findStyle(page, limit, status, styleId);
+      const project = await showcaseService.findStyle(+page, +limit, status, styleId);
 
       //get total documents
-      const pageInfo = await showcaseService.getPagination(page, limit);
+      const pageInfo = await showcaseService.getPagination(+page, +limit);
       const message = "what you filter was not found"
 
       if(project.length === 0){
