@@ -3,9 +3,9 @@ const { projectModel } = require("../model");
 
 //Module exports
 module.exports = {
-  find: async (page, limit) => {
+  find: async (userId, page, limit) => {
     return await projectModel
-      .find()
+      .findById(userId)
       .populate({
         path: "packages",
         populate: [
