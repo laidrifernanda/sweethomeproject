@@ -1,4 +1,4 @@
-const { showcaseModel, showcaseTypeModel , favoriteModel} = require("../model");
+const { showcaseModel, showcaseTypeModel, favoriteModel } = require("../model");
 
 module.exports = {
   findAll: async (page, limit) => {
@@ -97,7 +97,7 @@ module.exports = {
       })
       .populate({ path: "projectTypes", select: ["name"] })
       .populate({ path: "styles", select: ["name"] })
-      .populate({path:"locations", select: ["name"]})
+      .populate({ path: "locations", select: ["name"] })
       .populate({ path: "gallery" })
       .populate({ path: "favorites" })
       .populate({
@@ -199,63 +199,70 @@ module.exports = {
   },
   findStyle: async (page, limit, status, style) => {
     const idShowcaseType = await showcaseTypeModel.findOne({ name: status });
-      return await showcaseModel
-        .find({$and:[{showcaseType: idShowcaseType["id"]}, style]})
-        .populate({ path: "showcaseType", select: ["name"] })
-        .populate({
-          path: "project",
-          populate: [
-            {
-              path: "packages",
-              select: ["duration", "area", "price", "location","style" ,"projectType"],
-              populate: [
-                { path: "location", select: ["name"] },
-                {path: "style", select:["name"]},
-                { path: "projectType", select: ["name"] },
-              ],
-            },
-            {
-              path: "user",
-              select: ["address", "firstname", "lastname", "email"],
-            },
-            {
-              path: "appointment",
-              select: [
-                "buildType",
-                "budget",
-                "serviceType",
-                "duration",
-                "address",
-                "user",
-              ],
-              populate: [
-                { path: "buildType", select: ["name"] },
-                { path: "serviceType", select: ["name"] },
-                {
-                  path: "user",
-                  select: ["address", "firstname", "lastname", "email"],
-                },
-              ],
-            },
-          ],
-        })
-        .populate({ path: "projectTypes", select: ["name"] })
-        .populate({ path: "styles", select: ["name"] })
-        .populate({ path: "gallery" })
-        .populate({ path: "favorites" })
-        .populate({
-          path: "user",
-          select: ["address", "firstname", "lastname", "email"],
-        })
-        .populate({ path: "admin", select: ["name", "email"] })
-        .limit(limit)
-        .skip((page - 1) * limit)
-        .exec();
+    return await showcaseModel
+      .find({ $and: [{ showcaseType: idShowcaseType["id"] }, style] })
+      .populate({ path: "showcaseType", select: ["name"] })
+      .populate({
+        path: "project",
+        populate: [
+          {
+            path: "packages",
+            select: [
+              "duration",
+              "area",
+              "price",
+              "location",
+              "style",
+              "projectType",
+            ],
+            populate: [
+              { path: "location", select: ["name"] },
+              { path: "style", select: ["name"] },
+              { path: "projectType", select: ["name"] },
+            ],
+          },
+          {
+            path: "user",
+            select: ["address", "firstname", "lastname", "email"],
+          },
+          {
+            path: "appointment",
+            select: [
+              "buildType",
+              "budget",
+              "serviceType",
+              "duration",
+              "address",
+              "user",
+            ],
+            populate: [
+              { path: "buildType", select: ["name"] },
+              { path: "serviceType", select: ["name"] },
+              {
+                path: "user",
+                select: ["address", "firstname", "lastname", "email"],
+              },
+            ],
+          },
+        ],
+      })
+      .populate({ path: "projectTypes", select: ["name"] })
+      .populate({ path: "styles", select: ["name"] })
+      .populate({ path: "gallery" })
+      .populate({ path: "favorites" })
+      .populate({
+        path: "user",
+        select: ["address", "firstname", "lastname", "email"],
+      })
+      .populate({ path: "admin", select: ["name", "email"] })
+      .limit(limit)
+      .skip((page - 1) * limit)
+      .exec();
   },
   findLocation: async (page, limit, status, location) => {
     const idShowcaseType = await showcaseTypeModel.findOne({ name: status });
     return await showcaseModel
-      .find({$and:[{ showcaseType: idShowcaseType["id"] }, location]})
+      .find({ $and: [{ showcaseType: idShowcaseType["id"] }, location] })
       .populate({ path: "showcaseType", select: ["name"] })
       .populate({
         path: "project",
@@ -263,10 +270,17 @@ module.exports = {
           {
             path: "packages",
             // match: {location:locationId},
-            select: ["duration", "area", "price", "location","style" ,"projectType"],
+            select: [
+              "duration",
+              "area",
+              "price",
+              "location",
+              "style",
+              "projectType",
+            ],
             populate: [
               { path: "location", select: ["name"] },
-              {path: "style", select:["name"]},
+              { path: "style", select: ["name"] },
               { path: "projectType", select: ["name"] },
             ],
           },
@@ -309,13 +323,26 @@ module.exports = {
       .exec();
   },
   love: async (showcaseId, user) => {
-    const showcase = showcaseModel.findById(showcaseId)
+    const showcase = await showcaseModel.findById(showcaseId);
     const favorite = new favoriteModel({
       showcase: showcaseId,
-      user: user
-    })
-    showcase.favorites.push(favorite)
-    return await favorite.save()
+      user: user,
+    });
+
+    showcase.favorites.push(favorite);
+    await showcase.save();
+    return await favorite.save();
+  },
+  match: async (showcaseId, user) => {
+    return await favoriteModel.findOne({ user: user, showcase: showcaseId });
+  },
+  deleteLove: async (showcaseId, user) => {
+    const favorite = await favoriteModel.findOne({
+      showcase: showcaseId,
+      user: user,
+    });
+    await favoriteModel.deleteOne({ showcase: showcaseId, user: user });
+    return favorite;
   },
   getPagination: async (page, limit) => {
     const totalItem = await showcaseModel.countDocuments();

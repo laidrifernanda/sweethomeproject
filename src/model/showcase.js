@@ -54,6 +54,7 @@ const showcaseSchema = new Schema(
       {
         type: Schema.Types.ObjectId,
         ref: "favorite",
+        required: false
       },
     ],
     admin:
