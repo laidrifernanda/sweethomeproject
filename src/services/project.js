@@ -31,7 +31,17 @@ module.exports = {
     return await projectModel
       .findById(projectId)
       .populate({ path: "packages" })
-      .populate({ path: "user", select: ["-appointments"] });
+      .populate({
+        path: "user",
+        select: [
+          "photo",
+          "phone",
+          "firstname",
+          "lastname",
+          "email",
+          "address"
+        ],
+      });
   },
   getPagination: async (userId, page, limit) => {
     const totalItem = await projectModel
