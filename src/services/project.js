@@ -23,6 +23,7 @@ module.exports = {
         "createdAt",
         "updatedAt",
         "status",
+        "ticket",
       ])
       .exec();
   },
