@@ -38,6 +38,12 @@ const showcaseSchema = new Schema(
         ref: "styles",
       },
     ],
+    locations: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "location",
+      },
+    ],
     gallery: [
       {
         type: Schema.Types.ObjectId,
@@ -50,7 +56,7 @@ const showcaseSchema = new Schema(
         ref: "favorite",
       },
     ],
-    admin: 
+    admin:
       {
         type: Schema.Types.ObjectId,
         ref: "admin",

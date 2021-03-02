@@ -97,6 +97,7 @@ module.exports = {
       })
       .populate({ path: "projectTypes", select: ["name"] })
       .populate({ path: "styles", select: ["name"] })
+      .populate({path:"locations", select: ["name"]})
       .populate({ path: "gallery" })
       .populate({ path: "favorites" })
       .populate({
@@ -196,12 +197,122 @@ module.exports = {
       },
     ]);
   },
+  findStyle: async (page, limit, status, style) => {
+    const idShowcaseType = await showcaseTypeModel.findOne({ name: status });
+      return await showcaseModel
+        .find({$and:[{showcaseType: idShowcaseType["id"]}, style]})
+        .populate({ path: "showcaseType", select: ["name"] })
+        .populate({
+          path: "project",
+          populate: [
+            {
+              path: "packages",
+              select: ["duration", "area", "price", "location","style" ,"projectType"],
+              populate: [
+                { path: "location", select: ["name"] },
+                {path: "style", select:["name"]},
+                { path: "projectType", select: ["name"] },
+              ],
+            },
+            {
+              path: "user",
+              select: ["address", "firstname", "lastname", "email"],
+            },
+            {
+              path: "appointment",
+              select: [
+                "buildType",
+                "budget",
+                "serviceType",
+                "duration",
+                "address",
+                "user",
+              ],
+              populate: [
+                { path: "buildType", select: ["name"] },
+                { path: "serviceType", select: ["name"] },
+                {
+                  path: "user",
+                  select: ["address", "firstname", "lastname", "email"],
+                },
+              ],
+            },
+          ],
+        })
+        .populate({ path: "projectTypes", select: ["name"] })
+        .populate({ path: "styles", select: ["name"] })
+        .populate({ path: "gallery" })
+        .populate({ path: "favorites" })
+        .populate({
+          path: "user",
+          select: ["address", "firstname", "lastname", "email"],
+        })
+        .populate({ path: "admin", select: ["name", "email"] })
+        .limit(limit)
+        .skip((page - 1) * limit)
+        .exec();
+  },
+  findLocation: async (page, limit, status, location) => {
+    const idShowcaseType = await showcaseTypeModel.findOne({ name: status });
+    return await showcaseModel
+      .find({$and:[{ showcaseType: idShowcaseType["id"] }, location]})
+      .populate({ path: "showcaseType", select: ["name"] })
+      .populate({
+        path: "project",
+        populate: [
+          {
+            path: "packages",
+            // match: {location:locationId},
+            select: ["duration", "area", "price", "location","style" ,"projectType"],
+            populate: [
+              { path: "location", select: ["name"] },
+              {path: "style", select:["name"]},
+              { path: "projectType", select: ["name"] },
+            ],
+          },
+          {
+            path: "user",
+            select: ["address", "firstname", "lastname", "email"],
+          },
+          {
+            path: "appointment",
+            select: [
+              "buildType",
+              "budget",
+              "serviceType",
+              "duration",
+              "address",
+              "user",
+            ],
+            populate: [
+              { path: "buildType", select: ["name"] },
+              { path: "serviceType", select: ["name"] },
+              {
+                path: "user",
+                select: ["address", "firstname", "lastname", "email"],
+              },
+            ],
+          },
+        ],
+      })
+      .populate({ path: "projectTypes", select: ["name"] })
+      .populate({ path: "styles", select: ["name"] })
+      .populate({ path: "gallery" })
+      .populate({ path: "favorites" })
+      .populate({
+        path: "user",
+        select: ["address", "firstname", "lastname", "email"],
+      })
+      .populate({ path: "admin", select: ["name", "email"] })
+      .limit(limit)
+      .skip((page - 1) * limit)
+      .exec();
+  },
   love: async (showcaseId, user) => {
     const favorite = new favoriteModel({
       showcase: showcaseId,
       user: user
     })
-    
     return await favorite.save()
   },
   getPagination: async (page, limit) => {
