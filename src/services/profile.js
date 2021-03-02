@@ -4,7 +4,7 @@ const { userModel } = require("../model");
 //Module Exports
 module.exports = {
   findId: async (id) => {
-    return await userModel.findById(id);
+    return await userModel.findById(id).select("-appointments");
   },
   update: async (updateUser, userId) => {
 		return await userModel.findByIdAndUpdate(userId, updateUser, {
