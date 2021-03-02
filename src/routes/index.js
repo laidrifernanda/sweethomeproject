@@ -12,6 +12,7 @@ const userShowCaseRouter = require("./showcase");
 const paymentRouter = require("./payment");
 const projectRouter = require("./project");
 const cancelRouter = require("./cancel");
+const favoriteRouter  = require("./favorite")
 
 //Module exports
 module.exports = {
@@ -28,4 +29,5 @@ module.exports = {
   paymentRouter,
   projectRouter,
   cancelRouter,
+  favoriteRouter
 };
