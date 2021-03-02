@@ -10,8 +10,22 @@ module.exports = {
       const appointment = await appointmentService.find(user, +page, +limit);
 
       //get total documents
-      const pageInfo = await appointmentService.getPagination(user, +page, +limit);
+      const pageInfo = await appointmentService.getPagination(
+        user,
+        +page,
+        +limit
+      );
       res.status(200).send({ data: appointment, ...pageInfo });
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  },
+  read: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const appointment = await appointmentService.findId(id);
+
+      res.status(200).send({ data: appointment });
     } catch (err) {
       res.status(400).json({ error: err.message });
     }

@@ -16,6 +16,19 @@ module.exports = {
       .skip((page - 1) * limit)
       .exec();
   },
+  findId: async (id) => {
+    return await appointmentModel
+      .findById(id)
+      .populate({ path: "locations" })
+      .populate({ path: "serviceType", select: "name"})
+      .populate({
+        path: "user",
+        select: ["id", "firstname", "lastname", "email"],
+      })
+      .populate({ path: "buildType" })
+      .populate({ path: "styles" })
+      .populate({ path: "timeslot" });
+  },
   add: async (newAppointments, userId) => {
     //Create new appointments
     const user = await userModel.findById(userId);
