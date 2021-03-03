@@ -41,7 +41,6 @@ passport.use(new GoogleStrategy({
         //hash password
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(process.env.PASSWORD, salt);
-        
         console.log(profile, "<< ini profile")
         console.log(profile.email,  " ini email")
         let payload = {

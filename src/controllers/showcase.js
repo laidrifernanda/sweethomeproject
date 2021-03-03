@@ -83,7 +83,7 @@ module.exports = {
     const { query } = req;
     const location = { ...query };
     const locationId = await filter.locations(location);
-    console.log(locationId, "ini location dari filter");
+    // console.log(locationId, "ini location dari filter");
     const status = "Completed project";
     try {
       const project = await showcaseService.findLocation(
@@ -178,6 +178,145 @@ module.exports = {
         +limit,
         status,
         styleId
+      );
+
+      //get total documents
+      const pageInfo = await showcaseService.getPagination(+page, +limit);
+      const message = "what you filter was not found";
+
+      if (project.length === 0) {
+        res.status(200).send({ data: project, message: message, ...pageInfo });
+      } else {
+        res.status(200).send({ data: project, ...pageInfo });
+      }
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  },
+  locationShowcase: async (req, res) => {
+    // destructure page and limit and set default values
+    const { page = 1, limit = 10 } = req.query;
+    const { query } = req;
+    const location = { ...query };
+    const locationId = await filter.locations(location);
+    // console.log(locationId, "ini location dari filter");
+    try {
+      const project = await showcaseService.findLocationShowcase(
+        +page,
+        +limit,
+        locationId
+      );
+
+      //get total documents
+      const pageInfo = await showcaseService.getPagination(+page, +limit);
+      const message = "what you filter was not found";
+
+      if (project.length === 0) {
+        res.status(200).send({ data: project, message: message, ...pageInfo });
+      } else {
+        res.status(200).send({ data: project, ...pageInfo });
+      }
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  },
+  styleShowcase: async (req, res) => {
+    // destructure page and limit and set default values
+    const { page = 1, limit = 10 } = req.query;
+    const { query } = req;
+    const style = { ...query };
+    const styleId = await filter.styles(style);
+    // console.log(styleId, "ini style dari filter")
+    try {
+      const project = await showcaseService.findStyleShowcase(
+        +page,
+        +limit,
+        styleId
+      );
+
+      //get total documents
+      const pageInfo = await showcaseService.getPagination(+page, +limit);
+      const message = "what you filter was not found";
+
+      if (project.length === 0) {
+        res.status(200).send({ data: project, message: message, ...pageInfo });
+      } else {
+        res.status(200).send({ data: project, ...pageInfo });
+      }
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  },
+  bothProject: async (req, res) => {
+    // destructure page and limit and set default values
+    const { page = 1, limit = 10 } = req.query;
+    const { query } = req;
+    const id = { ...query };
+    const filterId = await filter.both(id);
+    // console.log(filterId, "ini filterId");
+    const status = "Completed project";
+    try {
+      const project = await showcaseService.both(
+        +page,
+        +limit,
+        status,
+        filterId
+      );
+
+      //get total documents
+      const pageInfo = await showcaseService.getPagination(+page, +limit);
+      const message = "what you filter was not found";
+
+      if (project.length === 0) {
+        res.status(200).send({ data: project, message: message, ...pageInfo });
+      } else {
+        res.status(200).send({ data: project, ...pageInfo });
+      }
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  },
+  bothProfile: async (req, res) => {
+    // destructure page and limit and set default values
+    const { page = 1, limit = 10 } = req.query;
+    const { query } = req;
+    const id = { ...query };
+    const filterId = await filter.both(id);
+    // console.log(filterId, "ini filterId");
+    const status = "Portofolio";
+    try {
+      const project = await showcaseService.both(
+        +page,
+        +limit,
+        status,
+        filterId
+      );
+
+      //get total documents
+      const pageInfo = await showcaseService.getPagination(+page, +limit);
+      const message = "what you filter was not found";
+
+      if (project.length === 0) {
+        res.status(200).send({ data: project, message: message, ...pageInfo });
+      } else {
+        res.status(200).send({ data: project, ...pageInfo });
+      }
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  },
+  bothShowcase: async (req, res) => {
+    // destructure page and limit and set default values
+    const { page = 1, limit = 10 } = req.query;
+    const { query } = req;
+    const id = { ...query };
+    const filterId = await filter.both(id);
+    // console.log(filterId, "ini filterId");
+    try {
+      const project = await showcaseService.bothShowcase(
+        +page,
+        +limit,
+        filterId
       );
 
       //get total documents
