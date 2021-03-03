@@ -17,7 +17,7 @@ module.exports = {
     const cancelData = new cancelModel(newCancel);
     await projectModel.findByIdAndUpdate(
       { _id: projectId },
-      { status: "Cancelled" }
+      { status: "Cancelled Requested" }
     );
     return await cancelData.save();
   },
