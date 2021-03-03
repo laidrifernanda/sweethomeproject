@@ -247,6 +247,64 @@ module.exports = {
       res.status(400).json({ error: err.message });
     }
   },
+  bothProject: async (req, res) => {
+    // destructure page and limit and set default values
+    const { page = 1, limit = 10 } = req.query;
+    const { query } = req;
+    const id = { ...query };
+    const filterId = await filter.both(id);
+    console.log(filterId, "ini filterId");
+    const status = "Completed project";
+    try {
+      const project = await showcaseService.both(
+        +page,
+        +limit,
+        status,
+        filterId
+      );
+
+      //get total documents
+      const pageInfo = await showcaseService.getPagination(+page, +limit);
+      const message = "what you filter was not found";
+
+      if (project.length === 0) {
+        res.status(200).send({ data: project, message: message, ...pageInfo });
+      } else {
+        res.status(200).send({ data: project, ...pageInfo });
+      }
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  },
+  bothProfile: async (req, res) => {
+    // destructure page and limit and set default values
+    const { page = 1, limit = 10 } = req.query;
+    const { query } = req;
+    const id = { ...query };
+    const filterId = await filter.both(id);
+    console.log(filterId, "ini filterId");
+    const status = "Portofolio";
+    try {
+      const project = await showcaseService.both(
+        +page,
+        +limit,
+        status,
+        filterId
+      );
+
+      //get total documents
+      const pageInfo = await showcaseService.getPagination(+page, +limit);
+      const message = "what you filter was not found";
+
+      if (project.length === 0) {
+        res.status(200).send({ data: project, message: message, ...pageInfo });
+      } else {
+        res.status(200).send({ data: project, ...pageInfo });
+      }
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  },
   love: async (req, res) => {
     const { user } = req;
     const { showcaseId } = req.params;

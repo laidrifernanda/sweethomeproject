@@ -1,4 +1,4 @@
-// const {packageModel,projectModel} = require("../model/index")
+const {locationModel, stylesModel} = require("../model/index")
 
 module.exports = {
     styles: async (style) => {
@@ -23,11 +23,29 @@ module.exports = {
         filter.$and = array
         return filter
     },
-    both: async () => {
-        const listStyle = await stylesModel.find()
-        // console.log(listStyle[0]._id, "ini list style")
-        listStyle.forEach(element => {
-        console.log(element.id, "ini litst style")
-        });
+    both: async (id) => {
+        const styles = await stylesModel.find()
+        const locations = await locationModel.find()
+        let filter = {$and:[]}
+        let listLocations = {$and:[]}
+        let listStyles = {$and:[]}
+        let object = {}
+        for(key in id) {
+            styles.forEach(el => {
+                if(el.id === id[key]) {
+                    object = {styles:id[key]}
+                    listStyles.$and.push(object)
+                }
+            });
+            locations.forEach(el => {
+                if(el.id === id[key]) {
+                    object = {locations:id[key]}
+                    listLocations.$and.push(object)
+                }
+            });
+        }
+        filter.$and.push(listLocations)
+        filter.$and.push(listStyles)
+        return filter
     }
 }
