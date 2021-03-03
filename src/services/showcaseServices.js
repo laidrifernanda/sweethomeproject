@@ -43,6 +43,7 @@ module.exports = {
       })
       .populate({ path: "projectTypes", select: ["name"] })
       .populate({ path: "styles", select: ["name"] })
+      .populate({ path: "locations", select: ["name"] })
       .populate({ path: "gallery" })
       .populate({ path: "favorites" })
       .populate({
@@ -113,6 +114,7 @@ module.exports = {
     return await showcaseModel
       .findById(showcaseId)
       .populate({ path: "styles" })
+      .populate({ path: "locations" })
       .populate({ path: "projectTypes" })
       .populate({ path: "gallery" })
       .populate({ path: "favorites" })
@@ -248,6 +250,7 @@ module.exports = {
       })
       .populate({ path: "projectTypes", select: ["name"] })
       .populate({ path: "styles", select: ["name"] })
+      .populate({ path: "locations", select: ["name"] })
       .populate({ path: "gallery" })
       .populate({ path: "favorites" })
       .populate({
@@ -311,6 +314,132 @@ module.exports = {
       })
       .populate({ path: "projectTypes", select: ["name"] })
       .populate({ path: "styles", select: ["name"] })
+      .populate({ path: "locations", select: ["name"] })
+      .populate({ path: "gallery" })
+      .populate({ path: "favorites" })
+      .populate({
+        path: "user",
+        select: ["address", "firstname", "lastname", "email"],
+      })
+      .populate({ path: "admin", select: ["name", "email"] })
+      .limit(limit)
+      .skip((page - 1) * limit)
+      .exec();
+  },
+  findLocationShowcase: async (page, limit, location) => {
+    return await showcaseModel
+      .find( location )
+      .populate({ path: "showcaseType", select: ["name"] })
+      .populate({
+        path: "project",
+        populate: [
+          {
+            path: "packages",
+            // match: {location:locationId},
+            select: [
+              "duration",
+              "area",
+              "price",
+              "location",
+              "style",
+              "projectType",
+            ],
+            populate: [
+              { path: "location", select: ["name"] },
+              { path: "style", select: ["name"] },
+              { path: "projectType", select: ["name"] },
+            ],
+          },
+          {
+            path: "user",
+            select: ["address", "firstname", "lastname", "email"],
+          },
+          {
+            path: "appointment",
+            select: [
+              "buildType",
+              "budget",
+              "serviceType",
+              "duration",
+              "address",
+              "user",
+            ],
+            populate: [
+              { path: "buildType", select: ["name"] },
+              { path: "serviceType", select: ["name"] },
+              {
+                path: "user",
+                select: ["address", "firstname", "lastname", "email"],
+              },
+            ],
+          },
+        ],
+      })
+      .populate({ path: "projectTypes", select: ["name"] })
+      .populate({ path: "styles", select: ["name"] })
+      .populate({ path: "locations", select: ["name"] })
+      .populate({ path: "gallery" })
+      .populate({ path: "favorites" })
+      .populate({
+        path: "user",
+        select: ["address", "firstname", "lastname", "email"],
+      })
+      .populate({ path: "admin", select: ["name", "email"] })
+      .limit(limit)
+      .skip((page - 1) * limit)
+      .exec();
+  },
+  findStyleShowcase: async (page, limit, style) => {
+    return await showcaseModel
+      .find(style)
+      .populate({ path: "showcaseType", select: ["name"] })
+      .populate({
+        path: "project",
+        populate: [
+          {
+            path: "packages",
+            select: [
+              "duration",
+              "area",
+              "price",
+              "location",
+              "style",
+              "projectType",
+            ],
+            populate: [
+              { path: "location", select: ["name"] },
+              { path: "style", select: ["name"] },
+              { path: "projectType", select: ["name"] },
+            ],
+          },
+          {
+            path: "user",
+            select: ["address", "firstname", "lastname", "email"],
+          },
+          {
+            path: "appointment",
+            select: [
+              "buildType",
+              "budget",
+              "serviceType",
+              "duration",
+              "address",
+              "user",
+            ],
+            populate: [
+              { path: "buildType", select: ["name"] },
+              { path: "serviceType", select: ["name"] },
+              {
+                path: "user",
+                select: ["address", "firstname", "lastname", "email"],
+              },
+            ],
+          },
+        ],
+      })
+      .populate({ path: "projectTypes", select: ["name"] })
+      .populate({ path: "styles", select: ["name"] })
+      .populate({ path: "locations", select: ["name"] })
       .populate({ path: "gallery" })
       .populate({ path: "favorites" })
       .populate({
