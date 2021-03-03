@@ -20,6 +20,7 @@ router.get("/showcase/project/location&style", showcaseController.bothProject);
 router.get("/showcase/portofolio/location&style", showcaseController.bothProfile);
 router.get("/showcase/location", showcaseController.locationShowcase)
 router.get("/showcase/style", showcaseController.styleShowcase)
+router.get("/showcase/location&style", showcaseController.bothShowcase)
 router.get("/showcase/:showcaseId", showcaseController.read);
 /*-----------------------Favorite-------------------------*/
 router.post(
