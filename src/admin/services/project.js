@@ -12,7 +12,7 @@ module.exports = {
           { path: "location", select: ["name"] },
           { path: "projectType", select: ["name"] },
         ],
-        select: ["populate"],
+        select: ["populate", "duration","area","price"],
       })
       .populate({ path: "user", select: ["firstname", "lastname"] })
       .limit(limit)
