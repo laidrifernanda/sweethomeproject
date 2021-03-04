@@ -79,9 +79,7 @@ module.exports = {
   },
   locationProject: async (req, res) => {
     // destructure page and limit and set default values
-    const { page = 1, limit = 10 } = req.query;
-    const { query } = req;
-    const location = { ...query };
+    const { page = 1, limit = 10, ...location } = req.query;
     const locationId = await filter.locations(location);
     // console.log(locationId, "ini location dari filter");
     const status = "Completed project";
@@ -108,11 +106,8 @@ module.exports = {
   },
   locationProfile: async (req, res) => {
     // destructure page and limit and set default values
-    const { page = 1, limit = 10 } = req.query;
-    const { query } = req;
-    const location = { ...query };
+    const { page = 1, limit = 10, ...location } = req.query
     const locationId = await filter.locations(location);
-    // console.log(locationId, "ini location dari filter")
     const status = "Portofolio";
     try {
       const project = await showcaseService.findLocation(
@@ -137,11 +132,8 @@ module.exports = {
   },
   styleProject: async (req, res) => {
     // destructure page and limit and set default values
-    const { page = 1, limit = 10 } = req.query;
-    const { query } = req;
-    const style = { ...query };
+    const { page = 1, limit = 10, ...style } = req.query;
     const styleId = await filter.styles(style);
-    // console.log(styleId, "ini style dari filter")
     const status = "Completed project";
     try {
       const project = await showcaseService.findStyle(
@@ -166,11 +158,8 @@ module.exports = {
   },
   stylePortofolio: async (req, res) => {
     // destructure page and limit and set default values
-    const { page = 1, limit = 10 } = req.query;
-    const { query } = req;
-    const style = { ...query };
+    const { page = 1, limit = 10, ...style } = req.query;
     const styleId = await filter.styles(style);
-    // console.log(styleId, "ini style dari filter")
     const status = "Portofolio";
     try {
       const project = await showcaseService.findStyle(
@@ -195,11 +184,8 @@ module.exports = {
   },
   locationShowcase: async (req, res) => {
     // destructure page and limit and set default values
-    const { page = 1, limit = 10 } = req.query;
-    const { query } = req;
-    const location = { ...query };
+    const { page = 1, limit = 10, ...location } = req.query;
     const locationId = await filter.locations(location);
-    // console.log(locationId, "ini location dari filter");
     try {
       const project = await showcaseService.findLocationShowcase(
         +page,
@@ -222,11 +208,8 @@ module.exports = {
   },
   styleShowcase: async (req, res) => {
     // destructure page and limit and set default values
-    const { page = 1, limit = 10 } = req.query;
-    const { query } = req;
-    const style = { ...query };
+    const { page = 1, limit = 10, ...style } = req.query;
     const styleId = await filter.styles(style);
-    // console.log(styleId, "ini style dari filter")
     try {
       const project = await showcaseService.findStyleShowcase(
         +page,
@@ -249,11 +232,8 @@ module.exports = {
   },
   bothProject: async (req, res) => {
     // destructure page and limit and set default values
-    const { page = 1, limit = 10 } = req.query;
-    const { query } = req;
-    const id = { ...query };
+    const { page = 1, limit = 10, ...id } = req.query;
     const filterId = await filter.both(id);
-    // console.log(filterId, "ini filterId");
     const status = "Completed project";
     try {
       const project = await showcaseService.both(
@@ -278,9 +258,7 @@ module.exports = {
   },
   bothProfile: async (req, res) => {
     // destructure page and limit and set default values
-    const { page = 1, limit = 10 } = req.query;
-    const { query } = req;
-    const id = { ...query };
+    const { page = 1, limit = 10, ...id } = req.query;
     const filterId = await filter.both(id);
     // console.log(filterId, "ini filterId");
     const status = "Portofolio";
@@ -307,11 +285,8 @@ module.exports = {
   },
   bothShowcase: async (req, res) => {
     // destructure page and limit and set default values
-    const { page = 1, limit = 10 } = req.query;
-    const { query } = req;
-    const id = { ...query };
+    const { page = 1, limit = 10, ...id } = req.query;
     const filterId = await filter.both(id);
-    // console.log(filterId, "ini filterId");
     try {
       const project = await showcaseService.bothShowcase(
         +page,
