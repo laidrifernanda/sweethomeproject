@@ -17,6 +17,7 @@ const favoriteModel = require("./favorite");
 const cancelModel = require("./cancel");
 const buildTypeModel = require("./buildType");
 const appointmentModel = require("./appointment");
+const feedbackModel = require("./feedback");
 
 //Module exports
 module.exports = {
@@ -38,4 +39,5 @@ module.exports = {
   cancelModel,
   buildTypeModel,
   appointmentModel,
+  feedbackModel,
 };
