@@ -38,11 +38,13 @@ module.exports = {
       0
     );
     const totalPrice = projectData.packages.reduce((a, b) => a + b.price, 0);
+    const totalArea = projectData.packages.reduce((a, b) => a + b.area, 0);
     const project = new projectModel({
       ...projectData,
       packages: [],
       totalDuration,
-      totalPrice,
+      totalArea,
+      totalPrice
     });
     await project.save();
     for (data of projectData.packages) {

@@ -33,6 +33,9 @@ const projectSchema = new Schema(
     totalDuration: {
       type: Number,
     },
+    totalArea: {
+      type: Number,
+    },
     totalPrice: {
       type: Number,
     },
