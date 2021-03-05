@@ -7,7 +7,11 @@ const feedbackSchema = new Schema(
   {
     feedback: {
       type: String,
-      required: [true, 'Feedback is required']
+      required: [true, "Feedback is required"],
+    },
+    project: {
+      type: Schema.Types.ObjectId,
+      ref: "project",
     },
     user: {
       type: Schema.Types.ObjectId,

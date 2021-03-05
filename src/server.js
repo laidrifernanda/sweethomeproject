@@ -48,6 +48,7 @@ const {
   projectRouter,
   cancelRouter,
   favoriteRouter,
+  feedbackRouter,
 } = require("./routes");
 
 //Import data
@@ -108,6 +109,7 @@ app.use(PATH_USER, paymentRouter);
 app.use(PATH_USER, projectRouter);
 app.use(PATH_USER, cancelRouter);
 app.use(PATH_USER, favoriteRouter);
+app.use(PATH_USER, feedbackRouter);
 
 //Module Exports
 module.exports = app;
