@@ -19,6 +19,7 @@ module.exports = {
       .skip((page - 1) * limit)
       .select([
         "totalDuration",
+        "totalArea",
         "totalPrice",
         "createdAt",
         "updatedAt",
