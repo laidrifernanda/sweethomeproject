@@ -57,6 +57,7 @@ module.exports = {
   },
   find: async (page, limit, status) => {
     const idShowcaseType = await showcaseTypeModel.findOne({ name: status });
+    console.log(page, "ini page")
     return await showcaseModel
       .find({ showcaseType: idShowcaseType["id"] })
       .populate({ path: "showcaseType", select: ["name"] })
@@ -264,6 +265,7 @@ module.exports = {
   },
   findLocation: async (page, limit, status, location) => {
     const idShowcaseType = await showcaseTypeModel.findOne({ name: status });
+    console.log(location, "ini location di service")
     return await showcaseModel
       .find({ $and: [{ showcaseType: idShowcaseType["id"] }, location] })
       .populate({ path: "showcaseType", select: ["name"] })
@@ -327,6 +329,7 @@ module.exports = {
       .exec();
   },
   findLocationShowcase: async (page, limit, location) => {
+    console.log(location, "ini location di service")
     return await showcaseModel
       .find( location )
       .populate({ path: "showcaseType", select: ["name"] })
@@ -610,6 +613,23 @@ module.exports = {
     const idShowcaseType = await showcaseTypeModel.findOne({ name: status });
     const totalItem = await showcaseModel
       .find({ showcaseType: idShowcaseType["id"] })
+      .countDocuments();
+    const activePage = page;
+    const totalPage = Math.ceil(totalItem / limit);
+    return { totalItem, activePage, totalPage };
+  },
+  getPaginationByFilter: async (page, limit, status, filter) => {
+    const idShowcaseType = await showcaseTypeModel.findOne({ name: status });
+    const totalItem = await showcaseModel
+      .find({ $and: [{ showcaseType: idShowcaseType["id"] }, filter] })
+      .countDocuments();
+    const activePage = page;
+    const totalPage = Math.ceil(totalItem / limit);
+    return { totalItem, activePage, totalPage };
+  },
+  getPaginationByShowcase: async (page, limit, id) => {
+    const totalItem = await showcaseModel
+      .find(id)
       .countDocuments();
     const activePage = page;
     const totalPage = Math.ceil(totalItem / limit);

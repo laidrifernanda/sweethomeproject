@@ -92,7 +92,7 @@ module.exports = {
       );
 
       //get total documents
-      const pageInfo = await showcaseService.getPagination(+page, +limit);
+      const pageInfo = await showcaseService.getPaginationByFilter(+page, +limit, status, locationId);
       const message = "what you filter was not found";
 
       if (project.length === 0) {
@@ -118,7 +118,7 @@ module.exports = {
       );
 
       //get total documents
-      const pageInfo = await showcaseService.getPagination(+page, +limit);
+      const pageInfo = await showcaseService.getPaginationByFilter(+page, +limit, status, locationId);
       const message = "what you filter was not found";
 
       if (project.length === 0) {
@@ -144,7 +144,7 @@ module.exports = {
       );
 
       //get total documents
-      const pageInfo = await showcaseService.getPagination(+page, +limit);
+      const pageInfo = await showcaseService.getPaginationByFilter(+page, +limit, status, styleId);
       const message = "what you filter was not found";
 
       if (project.length === 0) {
@@ -170,7 +170,7 @@ module.exports = {
       );
 
       //get total documents
-      const pageInfo = await showcaseService.getPagination(+page, +limit);
+      const pageInfo = await showcaseService.getPaginationByFilter(+page, +limit, status, styleId);
       const message = "what you filter was not found";
 
       if (project.length === 0) {
@@ -186,6 +186,7 @@ module.exports = {
     // destructure page and limit and set default values
     const { page = 1, limit = 10, ...location } = req.query;
     const locationId = await filter.locations(location);
+    console.log(locationId, "ini location id")
     try {
       const project = await showcaseService.findLocationShowcase(
         +page,
@@ -194,7 +195,7 @@ module.exports = {
       );
 
       //get total documents
-      const pageInfo = await showcaseService.getPagination(+page, +limit);
+      const pageInfo = await showcaseService.getPaginationByShowcase(+page, +limit, locationId);
       const message = "what you filter was not found";
 
       if (project.length === 0) {
@@ -218,7 +219,7 @@ module.exports = {
       );
 
       //get total documents
-      const pageInfo = await showcaseService.getPagination(+page, +limit);
+      const pageInfo = await showcaseService.getPaginationByShowcase(+page, +limit, styleId);
       const message = "what you filter was not found";
 
       if (project.length === 0) {
@@ -244,7 +245,7 @@ module.exports = {
       );
 
       //get total documents
-      const pageInfo = await showcaseService.getPagination(+page, +limit);
+      const pageInfo = await showcaseService.getPaginationByFilter(+page, +limit, status, filterId);
       const message = "what you filter was not found";
 
       if (project.length === 0) {
@@ -271,7 +272,7 @@ module.exports = {
       );
 
       //get total documents
-      const pageInfo = await showcaseService.getPagination(+page, +limit);
+      const pageInfo = await showcaseService.getPaginationByFilter(+page, +limit, status, filterId);
       const message = "what you filter was not found";
 
       if (project.length === 0) {
@@ -295,7 +296,7 @@ module.exports = {
       );
 
       //get total documents
-      const pageInfo = await showcaseService.getPagination(+page, +limit);
+      const pageInfo = await showcaseService.getPaginationByShowcase(+page, +limit, filterId);
       const message = "what you filter was not found";
 
       if (project.length === 0) {
