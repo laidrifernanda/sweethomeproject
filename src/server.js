@@ -50,6 +50,7 @@ const {
   cancelRouter,
   favoriteRouter,
   feedbackRouter,
+  privacyRouter,
 } = require("./routes");
 
 //Import data
@@ -113,6 +114,7 @@ app.use(PATH_USER, projectRouter);
 app.use(PATH_USER, cancelRouter);
 app.use(PATH_USER, favoriteRouter);
 app.use(PATH_USER, feedbackRouter);
+app.use(PATH_USER, privacyRouter);
 
 //Module Exports
 module.exports = app;
