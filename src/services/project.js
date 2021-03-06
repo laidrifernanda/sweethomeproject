@@ -14,6 +14,7 @@ module.exports = {
         ],
         select: ["populate"],
       })
+      .populate({ path: "cancelPayment", select: ["reason"] })
       .populate({ path: "user", select: ["firstname", "lastname"] })
       .limit(limit)
       .skip((page - 1) * limit)
@@ -24,6 +25,8 @@ module.exports = {
         "updatedAt",
         "status",
         "ticket",
+        "cancelPayment",
+        "payment",
       ])
       .exec();
   },

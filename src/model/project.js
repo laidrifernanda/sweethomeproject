@@ -21,7 +21,6 @@ const projectSchema = new Schema(
         "On Going",
         "Cancelled",
         "Done",
-        "Cancellation Requested",
       ],
       default: "Waiting Payment",
       minlength: 3,

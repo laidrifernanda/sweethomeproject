@@ -30,6 +30,7 @@ const {
   projectRoutes,
   showcaseRoutes,
   dashboardRoutes,
+  privacyRoutes,
 } = require("./admin/routes");
 
 //User Routes
@@ -92,6 +93,8 @@ app.use(PATH_ADMIN, appointmentAdminRoutes);
 app.use(PATH_ADMIN, projectRoutes);
 app.use(PATH_ADMIN, showcaseRoutes);
 app.use(PATH_ADMIN, dashboardRoutes);
+app.use(PATH_ADMIN, privacyRoutes);
+
 
 //User
 
