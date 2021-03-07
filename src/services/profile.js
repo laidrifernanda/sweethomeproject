@@ -7,9 +7,14 @@ module.exports = {
     return await userModel.findById(id).select("-appointments");
   },
   update: async (updateUser, userId) => {
-		return await userModel.findByIdAndUpdate(userId, updateUser, {
-			new: true,
-		});
+    return await userModel.findByIdAndUpdate(userId, updateUser, {
+      new: true,
+    });
+  },
+  updatePass: async (updateUser, userId) => {
+    return await userModel.findByIdAndUpdate(userId, updateUser, {
+      new: true,
+    });
   },
   upload: async (userId, uploadProfile) => {
     return await userModel.findByIdAndUpdate(

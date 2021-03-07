@@ -20,7 +20,7 @@ module.exports = {
       { _id: projectId },
       { status: "Cancelled" }
     );
-    project.cancelPayment.push(cancelData)
+    project.cancelPayment = cancelData
     await project.save()
     return await cancelData.save();
   },

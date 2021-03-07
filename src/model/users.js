@@ -13,13 +13,11 @@ const userSchema = new Schema(
     },
     firstname: {
       type: String,
-      required: [true, "Firstname is required"],
       minlength: 3,
       maxlength: 255,
     },
     lastname: {
       type: String,
-      required: [true, "Lastname is required"],
       minlength: 3,
       maxlength: 255,
     },
@@ -27,7 +25,6 @@ const userSchema = new Schema(
       type: String,
       trim: true,
       lowercase: true,
-      required: [true, "Email is required"],
       unique: true,
       match: [
         /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -36,7 +33,6 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      required: [true, "Password is required"],
     },
     phone: {
       type: String,
@@ -68,6 +64,10 @@ const userSchema = new Schema(
         ref: "appointment",
       },
     ],
+    privacy: {
+      type: Schema.Types.ObjectId,
+      ref: "privacy"
+    },
     activity: {
       type: Date,
       default: Date.now,
