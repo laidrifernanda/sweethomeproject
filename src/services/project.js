@@ -40,7 +40,7 @@ module.exports = {
           { path: "location", select: ["name"] },
           { path: "projectType", select: ["name"] },
         ],
-        select: ["populate"],
+        select: ["populate","duration","area","price"],
       })
       .populate({ path: "cancelPayment", select: ["reason"] })
       .populate({ path: "payment" })
