@@ -15,6 +15,7 @@ module.exports = {
         select: ["populate"],
       })
       .populate({ path: "cancelPayment", select: ["reason"] })
+      .populate({ path: "payment" })
       .populate({ path: "user", select: ["firstname", "lastname"] })
       .limit(limit)
       .skip((page - 1) * limit)
@@ -33,18 +34,27 @@ module.exports = {
   findId: async (projectId) => {
     return await projectModel
       .findById(projectId)
-      .populate({ path: "packages" })
       .populate({
-        path: "user",
-        select: [
-          "photo",
-          "phone",
-          "firstname",
-          "lastname",
-          "email",
-          "address"
+        path: "packages",
+        populate: [
+          { path: "location", select: ["name"] },
+          { path: "projectType", select: ["name"] },
         ],
-      });
+        select: ["populate"],
+      })
+      .populate({ path: "cancelPayment", select: ["reason"] })
+      .populate({ path: "payment" })
+      .populate({ path: "user", select: ["firstname", "lastname", "email"] })
+      .select([
+        "totalDuration",
+        "totalPrice",
+        "createdAt",
+        "updatedAt",
+        "status",
+        "ticket",
+        "cancelPayment",
+        "payment",
+      ]);
   },
   getPagination: async (userId, page, limit) => {
     const totalItem = await projectModel
