@@ -29,6 +29,7 @@ module.exports = {
         "cancelPayment",
         "payment",
         "appointment",
+        "receipt",
       ])
       .exec();
   },
@@ -55,7 +56,8 @@ module.exports = {
         "ticket",
         "cancelPayment",
         "payment",
-        "appointment"
+        "appointment",
+        "receipt",
       ]);
   },
   getPagination: async (userId, page, limit) => {
