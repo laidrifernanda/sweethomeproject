@@ -36,7 +36,6 @@ const appointmentSchema = new Schema(
     },
     note: {
       type: String,
-      required: [true, "Note is required"],
     },
     status: {
       type: String,

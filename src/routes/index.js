@@ -14,7 +14,8 @@ const projectRouter = require("./project");
 const cancelRouter = require("./cancel");
 const favoriteRouter = require("./favorite");
 const feedbackRouter = require("./feedback");
-const privacyRouter = require("./privacy")
+const privacyRouter = require("./privacy");
+const projectTypeRouter = require("./projectType")
 
 //Module exports
 module.exports = {
@@ -33,5 +34,6 @@ module.exports = {
   cancelRouter,
   favoriteRouter,
   feedbackRouter,
-  privacyRouter
+  privacyRouter,
+  projectTypeRouter
 };
