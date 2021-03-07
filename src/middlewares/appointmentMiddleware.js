@@ -9,7 +9,7 @@ module.exports = {
         budget: joi.number().required(),
         address: joi.string().required(),
         date: joi.date().required(),
-        // note: joi.string().required(),
+        note: joi.string(),
         buildType: joi.required(),
         serviceType: joi.required(),
         locations: joi.required(),
