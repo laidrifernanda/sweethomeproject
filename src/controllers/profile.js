@@ -1,5 +1,5 @@
 //Import dependencies
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 
 //Import data
 const profileService = require("../services/profile");
@@ -9,7 +9,7 @@ module.exports = {
   read: async (req, res) => {
     try {
       const { user } = req;
-      const userData = await profileService.findId({_id: user._id});
+      const userData = await profileService.findId({ _id: user._id });
 
       res.status(200).send({ data: userData });
     } catch (err) {
@@ -18,10 +18,21 @@ module.exports = {
   },
   update: async (req, res) => {
     const { body, user } = req;
+    //update user
+    const updateUser = { ...body };
+
+    try {
+      const saveUpdateUser = await profileService.update(updateUser, user._id);
+      res.send({ status: 200, message: saveUpdateUser });
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  },
+  updatePass: async (req, res) => {
+    const { body, user } = req;
     //Hash password
     const salt = await bcrypt.genSalt(10);
     const hashedpass = await bcrypt.hash(body.password, salt);
-
     //update user
     const updateUser = {
       ...body,
@@ -29,9 +40,7 @@ module.exports = {
     };
 
     try {
-      const saveUpdateUser = await profileService.update(updateUser, {
-        _id: user._id,
-      });
+      const saveUpdateUser = await profileService.updatePass(updateUser, user._id);
       res.send({ status: 200, message: saveUpdateUser });
     } catch (err) {
       res.status(400).json({ error: err.message });

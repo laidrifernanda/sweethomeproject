@@ -15,8 +15,16 @@ router.get("/profile",
     profileController.read)
 router.put("/profile", 
     authMiddleware.validateToken,
-    profileMiddleware.validateBody,
+    // profileMiddleware.validateBody,
     profileController.update)
+
+router.put(
+  "/profile/password",
+  authMiddleware.validateToken,
+//   profileMiddleware.validateBody,
+  profileController.updatePass
+);
+
 
 router.post("/upload", 
     authMiddleware.validateToken,
