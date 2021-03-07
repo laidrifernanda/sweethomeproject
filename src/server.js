@@ -51,6 +51,7 @@ const {
   favoriteRouter,
   feedbackRouter,
   privacyRouter,
+  projectTypeRouter
 } = require("./routes");
 
 //Import data
@@ -97,6 +98,7 @@ app.use(PATH_ADMIN, dashboardRoutes);
 app.use(PATH_ADMIN, privacyRoutes);
 
 
+
 //User
 
 app.use(PATH_USER, authRouter);
@@ -115,6 +117,7 @@ app.use(PATH_USER, cancelRouter);
 app.use(PATH_USER, favoriteRouter);
 app.use(PATH_USER, feedbackRouter);
 app.use(PATH_USER, privacyRouter);
+app.use(PATH_USER, projectTypeRouter);
 
 //Module Exports
 module.exports = app;
