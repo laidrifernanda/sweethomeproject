@@ -6,6 +6,7 @@ module.exports = {
   find: async (page, limit) => {
     return await appointmentModel
       .find()
+      .populate({ path: "styles", select: ["name"] })
       .populate({ path: "buildType", select: "name" })
       .populate({ path: "locations", select: "name" })
       .populate({ path: "serviceType", select: "name" })
