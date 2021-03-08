@@ -12,7 +12,6 @@ module.exports = {
       .populate({ path: "timeslot", select: ["id", "start", "end"] })
       .limit(limit)
       .skip((page - 1) * limit)
-      .select(["id", "createdAt", "date", "timeslot", "status"])
       .exec();
   },
   findId: async (id) => {
