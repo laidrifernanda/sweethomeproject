@@ -14,11 +14,14 @@ module.exports = {
     return await paymentModel.findById({ _id: paymentId });
   },
   payment: async (newPayment, projectId) => {
+    const project = await projectModel.findById(projectId);
     const paymentData = new paymentModel(newPayment);
     await projectModel.findByIdAndUpdate(
       { _id: projectId },
       { status: "On Going" }
     );
+    project.payment = paymentData
+    await project.save();
     return await paymentData.save();
   },
   getPagination: async (page, limit) => {

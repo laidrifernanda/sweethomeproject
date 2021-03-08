@@ -14,11 +14,14 @@ module.exports = {
     return await cancelModel.findById({ _id: cancelId });
   },
   cancel: async (newCancel, projectId) => {
+     const project = await projectModel.findById(projectId);
     const cancelData = new cancelModel(newCancel);
     await projectModel.findByIdAndUpdate(
       { _id: projectId },
-      { status: "Cancellation Requested" }
+      { status: "Cancelled" }
     );
+    project.cancelPayment = cancelData
+    await project.save()
     return await cancelData.save();
   },
   getPagination: async (page, limit) => {

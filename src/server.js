@@ -30,6 +30,7 @@ const {
   projectRoutes,
   showcaseRoutes,
   dashboardRoutes,
+  privacyRoutes,
 } = require("./admin/routes");
 
 //User Routes
@@ -49,6 +50,8 @@ const {
   cancelRouter,
   favoriteRouter,
   feedbackRouter,
+  privacyRouter,
+  projectTypeRouter
 } = require("./routes");
 
 //Import data
@@ -92,6 +95,9 @@ app.use(PATH_ADMIN, appointmentAdminRoutes);
 app.use(PATH_ADMIN, projectRoutes);
 app.use(PATH_ADMIN, showcaseRoutes);
 app.use(PATH_ADMIN, dashboardRoutes);
+app.use(PATH_ADMIN, privacyRoutes);
+
+
 
 //User
 
@@ -110,6 +116,8 @@ app.use(PATH_USER, projectRouter);
 app.use(PATH_USER, cancelRouter);
 app.use(PATH_USER, favoriteRouter);
 app.use(PATH_USER, feedbackRouter);
+app.use(PATH_USER, privacyRouter);
+app.use(PATH_USER, projectTypeRouter);
 
 //Module Exports
 module.exports = app;
