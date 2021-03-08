@@ -9,7 +9,7 @@ module.exports = {
       .populate({ path: "appointments", select: "createdAt" })
       .limit(limit)
       .skip((page - 1) * limit)
-      .select(["id", "firstname", "lastname", "email", "activity"])
+      .select(["id", "firstname", "lastname", "email", "activity","photo","phone"])
       .exec();
   },
   findId: async (id) => {
