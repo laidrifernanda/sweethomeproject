@@ -6,6 +6,7 @@ module.exports = {
   find: async (page, limit) => {
     return await appointmentModel
       .find()
+      .populate({ path: "buildType", select: "name" })
       .populate({ path: "locations", select: "name" })
       .populate({ path: "serviceType", select: "name" })
       .populate({ path: "user", select: ["id", "firstname", "lastname"] })
@@ -17,14 +18,14 @@ module.exports = {
   findId: async (id) => {
     return await appointmentModel
       .findById(id)
-      .populate({ path: "locations" })
-      .populate({ path: "serviceType" })
+      .populate({ path: "locations", select: ["name"] })
+      .populate({ path: "serviceType", select: ["name"] })
       .populate({
         path: "user",
         select: ["id", "firstname", "lastname", "email"],
       })
-      .populate({ path: "buildType" })
-      .populate({ path: "styles" })
+      .populate({ path: "buildType", select: ["name"] })
+      .populate({ path: "styles", select: ["name"] })
       .populate({ path: "timeslot" });
   },
   status: async (id, statusData) => {
