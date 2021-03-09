@@ -14,7 +14,7 @@ module.exports = {
         ],
         select: ["populate", "duration","area","price"],
       })
-      .populate({ path: "user", select: ["firstname", "lastname"] })
+      .populate({ path: "user", select: ["firstname", "lastname","photo"] })
       .limit(limit)
       .skip((page - 1) * limit)
       .select([
@@ -30,8 +30,26 @@ module.exports = {
   findId: async (id) => {
     return await projectModel
       .findById(id)
-      .populate({ path: "packages" })
-      .populate({ path: "user", select: ["-appointments"] });
+      .populate({
+        path: "packages",
+        populate: [
+          { path: "location", select: ["name"] },
+          { path: "projectType", select: ["name"] },
+        ],
+        select: ["populate", "duration", "area", "price"],
+      })
+      .populate({ path: "user", select: ["firstname", "lastname", "photo"] })
+      .limit(limit)
+      .skip((page - 1) * limit)
+      .select([
+        "totalDuration",
+        "totalArea",
+        "totalPrice",
+        "createdAt",
+        "updatedAt",
+        "status",
+      ])
+      .exec();
   },
   add: async (projectData) => {
     const totalDuration = projectData.packages.reduce(
