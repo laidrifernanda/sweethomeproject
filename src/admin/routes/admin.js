@@ -13,6 +13,7 @@ router.get(
   authMiddleware.validateToken,
   authController.browse
 );
+router.get("/profileAdmin", authMiddleware.validateToken, authController.read);
 router.post(
   "/register",
   authMiddleware.validateToken,

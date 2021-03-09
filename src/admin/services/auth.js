@@ -10,6 +10,9 @@ module.exports = {
       .skip((page - 1) * limit)
       .exec();
   },
+  read: async(adminId) => {
+    return await adminModel.findById(adminId).select("-password")
+  },
   findEmail: async (email) => {
     return await adminModel.findOne({ email });
   },

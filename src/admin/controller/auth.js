@@ -77,6 +77,17 @@ module.exports = {
       res.status(400).json({ error: err.message });
     }
   },
+  read: async (req, res) => {
+    // destructure page and limit and set default values
+    const{ admin } = req;
+    try {
+      const adminInfo = await adminService.read(admin._id);
+
+      res.status(200).send({ data: adminInfo });
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  },
   edit: async (req, res) => {
     const { body } = req;
     const { id } = req.params;
