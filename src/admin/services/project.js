@@ -39,8 +39,6 @@ module.exports = {
         select: ["populate", "duration", "area", "price"],
       })
       .populate({ path: "user", select: ["firstname", "lastname", "photo"] })
-      .limit(limit)
-      .skip((page - 1) * limit)
       .select([
         "totalDuration",
         "totalArea",
@@ -49,7 +47,6 @@ module.exports = {
         "updatedAt",
         "status",
       ])
-      .exec();
   },
   add: async (projectData) => {
     const totalDuration = projectData.packages.reduce(
