@@ -15,7 +15,7 @@ module.exports = {
           { path: "showcaseType", select: ["name"] },
           { path: "gallery" },
         ],
-        select: ["populate", "project","show","name"],
+        select: ["populate", "project","show","name","address"],
       })
       .populate({ path: "user", select: ["firstname", "lastname","email"] })
       .limit(limit)
