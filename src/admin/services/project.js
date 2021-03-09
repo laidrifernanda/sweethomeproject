@@ -38,15 +38,9 @@ module.exports = {
         ],
         select: ["populate", "duration", "area", "price"],
       })
-      .populate({ path: "user", select: ["firstname", "lastname", "photo"] })
-      .select([
-        "totalDuration",
-        "totalArea",
-        "totalPrice",
-        "createdAt",
-        "updatedAt",
-        "status",
-      ])
+      .populate({ path: "user", select: ["firstname", "lastname", "photo", "phone", "email"] })
+      .select("-appointment")
+    .exec()
   },
   add: async (projectData) => {
     const totalDuration = projectData.packages.reduce(
