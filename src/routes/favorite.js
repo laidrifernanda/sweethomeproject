@@ -14,4 +14,10 @@ router.get(
   favoriteController.browse
 );
 
+router.get(
+  "/favorite/search",
+  authMiddleware.validateToken,
+  favoriteController.searchFav
+)
+
 module.exports = router;
