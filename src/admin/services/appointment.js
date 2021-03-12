@@ -10,7 +10,7 @@ module.exports = {
       .populate({ path: "buildType", select: "name" })
       .populate({ path: "locations", select: "name" })
       .populate({ path: "serviceType", select: "name" })
-      .populate({ path: "user", select: ["id", "firstname", "lastname"] })
+      .populate({ path: "user", select: ["id", "firstname", "lastname","photo"] })
       .populate({ path: "timeslot", select: ["id", "start", "end"] })
       .limit(limit)
       .skip((page - 1) * limit)
@@ -23,7 +23,7 @@ module.exports = {
       .populate({ path: "serviceType", select: ["name"] })
       .populate({
         path: "user",
-        select: ["id", "firstname", "lastname", "email"],
+        select: ["id", "firstname", "lastname", "email","photo"],
       })
       .populate({ path: "buildType", select: ["name"] })
       .populate({ path: "styles", select: ["name"] })
