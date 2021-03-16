@@ -25,8 +25,10 @@ router.get("/failed", googleController.failed);
 router.get(
   "/auth/google/callback",
   passport.authenticate("google"),
+  googleController.profile,
   (req, res, next) => {
-    res.redirect("msrm42app://msrm42app.io?id=" + req.user.id);
+    let token = req.token;
+    res.redirect("msrm42app://msrm42app.io?id=" + token);
   }
 );
 
