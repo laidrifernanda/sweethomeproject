@@ -4,7 +4,7 @@ const { SALT_KEY } = process.env;
 const service = require("../services/findUser");
 
 module.exports = {
-  profile: async (req, res) => {
+  profile: async (req, res, next) => {
     const { user } = req;
     if (!user.userId) {
       const email = user.email;
@@ -13,13 +13,15 @@ module.exports = {
         _id: isUser.id,
       };
       let token = jwt.sign(payload, SALT_KEY);
-      res.status(200).send({ info: "LOGIN", data: { token, role: "USER" } });
+      req.token = token;
+      next();
     } else {
       const payload = {
         _id: user.userId,
       };
       let token = jwt.sign(payload, SALT_KEY);
-      res.status(200).send({ info: "LOGIN", data: { token, role: "USER" } });
+      req.token = token;
+      next();
     }
   },
   failed: (req, res) => {

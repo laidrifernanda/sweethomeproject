@@ -17,10 +17,19 @@ router.get(
 
 router.get("/failed", googleController.failed);
 
+// router.get(
+//   "/auth/google/callback",
+//   passport.authenticate("google", { failureRedirect: "/failed" }),
+//   googleController.profile
+// );
 router.get(
   "/auth/google/callback",
-  passport.authenticate("google", { failureRedirect: "/failed" }),
-  googleController.profile
+  passport.authenticate("google"),
+  googleController.profile,
+  (req, res, next) => {
+    let token = req.token;
+    res.redirect("msrm42app://msrm42app.io?id=" + token);
+  }
 );
 
 //facebook auth routes
@@ -41,8 +50,8 @@ router.get("/login", (req, res) => {
   res.send("tempat buat login");
 });
 
-router.get("/home", isLoggedIn, (req, res) => {
-  res.send("masuk home");
+router.get("/", function (req, res, next) {
+  res.render("index", { title: "Express" });
 });
 
 //Module export
