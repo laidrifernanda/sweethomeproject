@@ -40,7 +40,7 @@ passport.use(
         .findUser(profile.email)
         .then((email) => {
           if (email.length !== 0) {
-            return done(null, profile);
+            return done(null, profile, accessToken);
           } else {
             //hash password
             const salt = bcrypt.genSaltSync(10);
@@ -55,7 +55,7 @@ passport.use(
             profile.userId = id;
             const newUser = new userModel(payload);
             newUser.save();
-            return done(null, profile);
+            return done(null, profile, accessToken);
           }
         })
         .catch((err) => console.log(err, "ini error database"));
